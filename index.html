@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<audio id="welcomeSound" preload="auto">
+    <source src="voic.mp3" type="audio/mpeg">
+</audio>
+
 <div class="login-box">
     <h2>ورود</h2>
 
@@ -15,10 +19,48 @@
     <input type="password" id="password" placeholder="رمز عبور">
 
     <button onclick="login()">ورود</button>
+    
 
     <p id="msg"></p>
 </div>
 
 <script src="script.js"></script>
+<audio id="welcomeSound" preload="auto">
+    <source src="sounds/welcome.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+window.addEventListener("load", function () {
+
+    // اگر قبلاً در این بار اجرای برنامه پخش شده، دوباره پخش نکن
+    if(sessionStorage.getItem("voicePlayed")){
+        return;
+    }
+
+    const audio = document.getElementById("welcomeSound");
+
+    audio.loop = false;
+
+    audio.currentTime = 0;
+
+    audio.play().then(() => {
+        sessionStorage.setItem("voicePlayed","true");
+    }).catch(() => {
+
+        document.addEventListener("click", function playOnce(){
+
+            audio.play();
+
+            sessionStorage.setItem("voicePlayed","true");
+
+            document.removeEventListener("click", playOnce);
+
+        });
+
+    });
+
+});
+</script>
+</script>
 </body>
 </html>
