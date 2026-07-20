@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+تنظیمات
+</title>
+
+<link rel="stylesheet" href="settings.css">
+
+</head>
+
+<body>
+
+<!--========================
+      HEADER
+=========================-->
+
+<section class="settings-header">
+
+<h1>
+⚙ تنظیمات حساب کاربری
+</h1>
+
+<p>
+تمامی تغییرات به صورت خودکار در دستگاه ذخیره خواهد شد.
+</p>
+
+</section>
+
+
+
+<!--========================
+      PROFILE CARD
+=========================-->
+
+<section class="profile-card">
+
+<div class="profile-image">
+
+<img
+id="profilePreview"
+src="images/default-user.png"
+alt="Profile">
+
+<input
+type="file"
+id="profileImage"
+accept="image/*">
+
+<label
+for="profileImage"
+class="change-photo-btn">
+
+📷 تغییر عکس
+
+</label>
+
+</div>
+
+
+
+<div class="profile-form">
+
+<label>
+
+نام کاربری
+
+</label>
+
+<input
+type="text"
+id="username"
+placeholder="نام کاربری">
+
+
+
+<label>
+
+ایمیل
+
+</label>
+
+<input
+type="email"
+id="email"
+placeholder="example@gmail.com">
+
+</div>
+
+</section>
+
+
+
+
+<!--========================
+      APP THEME
+=========================-->
+
+<section class="theme-card">
+
+<h2>
+
+🎨 ظاهر برنامه
+
+</h2>
+
+
+
+<div class="theme-item">
+
+<span>
+
+🌙 حالت تیره
+
+</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="darkMode">
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+
+
+
+
+<div class="theme-item">
+
+<span>
+
+☀ حالت روشن
+
+</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="lightMode"
+checked>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</section>
+
+
+
+
+<!--========================
+      SAVE BUTTON
+=========================-->
+
+<section class="save-section">
+
+<button
+id="saveSettings">
+
+💾 ذخیره تنظیمات
+
+</button>
+
+</section>
+
+
+
+
+
+<!--========================
+      MESSAGE
+=========================-->
+
+<div
+id="saveMessage"
+class="save-message">
+
+✅ تنظیمات با موفقیت ذخیره شد
+
+</div>
+
+
+
+
+
+<script src="settings.js"></script>
+
+</body>
+
+</html>

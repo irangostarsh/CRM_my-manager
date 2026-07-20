@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>فاکتور هوشمند</title>
+
+<link rel="stylesheet" href="invoice.css">
+
+</head>
+
+<body>
+
+<!--====================================
+        HEADER
+=====================================-->
+
+<section class="invoice-header">
+
+<div>
+
+<h1>
+
+📄 ساخت فاکتور
+
+</h1>
+
+<p>
+
+صدور فاکتور حرفه‌ای
+
+</p>
+
+</div>
+
+<div class="invoice-logo">
+
+<img
+id="companyLogo"
+src="images/logo.png"
+alt="logo">
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        INVOICE INFO
+=====================================-->
+
+<section class="invoice-info">
+
+<div class="invoice-grid">
+
+<div class="form-item">
+
+<label>
+
+شماره فاکتور
+
+</label>
+
+<input
+type="text"
+id="invoiceNumber"
+readonly>
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+<label>
+
+تاریخ
+
+</label>
+
+<input
+type="date"
+id="invoiceDate">
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+<label>
+
+ساعت
+
+</label>
+
+<input
+type="time"
+id="invoiceTime">
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+<label>
+
+نوع فاکتور
+
+</label>
+
+<select id="invoiceType">
+
+<option>
+
+فاکتور فروش
+
+</option>
+
+<option>
+
+پیش فاکتور
+
+</option>
+
+<option>
+
+فاکتور خدمات
+
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+
+
+<!--====================================
+        CUSTOMER INFO
+=====================================-->
+
+<section class="customer-box">
+
+<h2>
+
+👤 اطلاعات مشتری
+
+</h2>
+
+<div class="invoice-grid">
+
+<div class="form-item">
+
+<label>
+
+نام مشتری
+
+</label>
+
+<input
+type="text"
+id="customerName"
+placeholder="نام مشتری">
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+<label>
+
+شماره تماس
+
+</label>
+
+<input
+type="text"
+id="customerPhone"
+placeholder="09xxxxxxxxx">
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+<label>
+
+ایمیل
+
+</label>
+
+<input
+type="email"
+id="customerEmail"
+placeholder="example@gmail.com">
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+<label>
+
+کد ملی
+
+</label>
+
+<input
+type="text"
+id="customerCode">
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+<label>
+
+آدرس
+
+</label>
+
+<textarea
+
+id="customerAddress"
+
+rows="3"
+
+placeholder="آدرس مشتری">
+
+</textarea>
+
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+<!--====================================
+        PAYMENT INFO
+=====================================-->
+
+<section class="payment-box">
+
+<h2>
+
+💳 اطلاعات پرداخت
+
+</h2>
+
+<div class="invoice-grid">
+
+<div class="form-item">
+
+<label>
+
+وضعیت
+
+</label>
+
+<select id="invoiceStatus">
+
+<option value="paid">
+
+پرداخت شده
+
+</option>
+
+<option value="unpaid">
+
+پرداخت نشده
+
+</option>
+
+<option value="pending">
+
+در انتظار
+
+</option>
+
+</select>
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+<label>
+
+روش پرداخت
+
+</label>
+
+<select id="paymentMethod">
+
+<option>
+
+کارت بانکی
+
+</option>
+
+<option>
+
+نقدی
+
+</option>
+
+<option>
+
+کارت به کارت
+
+</option>
+
+<option>
+
+چک
+
+</option>
+
+<option>
+
+واریز بانکی
+
+</option>
+
+</select>
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+<label>
+
+شماره پیگیری
+
+</label>
+
+<input
+type="text"
+id="trackingCode">
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+<label>
+
+نام فروشنده
+
+</label>
+
+<input
+type="text"
+id="sellerName">
+
+</div>
+
+</div>
+
+</section>
+
+<!--====================================
+        PRODUCTS TABLE
+=====================================-->
+
+<section class="invoice-products">
+
+<div class="section-title">
+
+<h2>
+
+🛒 کالاها و خدمات
+
+</h2>
+
+<button
+id="addRowBtn">
+
+➕ افزودن ردیف
+
+</button>
+
+</div>
+
+
+
+
+
+<div class="table-responsive">
+
+<table
+class="invoice-table"
+id="invoiceTable">
+
+<thead>
+
+<tr>
+
+<th style="width:60px;">
+
+#
+
+</th>
+
+<th>
+
+نام کالا / خدمات
+
+</th>
+
+<th style="width:120px;">
+
+تعداد
+
+</th>
+
+<th style="width:130px;">
+
+واحد
+
+</th>
+
+<th style="width:180px;">
+
+قیمت واحد
+
+</th>
+
+<th style="width:120px;">
+
+تخفیف %
+
+</th>
+
+<th style="width:180px;">
+
+جمع کل
+
+</th>
+
+<th style="width:90px;">
+
+عملیات
+
+</th>
+
+</tr>
+
+</thead>
+
+
+
+
+
+<tbody id="invoiceBody">
+
+<tr>
+
+<td>
+
+1
+
+</td>
+
+<td>
+
+<input
+type="text"
+class="product-name"
+placeholder="نام کالا">
+
+</td>
+
+<td>
+
+<input
+type="number"
+class="product-count"
+value="1">
+
+</td>
+
+<td>
+
+<select class="product-unit">
+
+<option>
+
+عدد
+
+</option>
+
+<option>
+
+بسته
+
+</option>
+
+<option>
+
+کارتن
+
+</option>
+
+<option>
+
+کیلوگرم
+
+</option>
+
+<option>
+
+متر
+
+</option>
+
+<option>
+
+ساعت
+
+</option>
+
+<option>
+
+روز
+
+</option>
+
+</select>
+
+</td>
+
+<td>
+
+<input
+type="number"
+class="product-price"
+placeholder="0">
+
+</td>
+
+<td>
+
+<input
+type="number"
+class="product-discount"
+value="0">
+
+</td>
+
+<td>
+
+<input
+type="text"
+class="product-total"
+value="0"
+readonly>
+
+</td>
+
+<td>
+
+<button
+class="delete-row">
+
+🗑
+
+</button>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        INVOICE SUMMARY
+=====================================-->
+
+<section class="invoice-summary">
+
+<div class="summary-box">
+
+<div class="summary-row">
+
+<span>
+
+جمع کل کالاها
+
+</span>
+
+<strong id="subTotal">
+
+0 تومان
+
+</strong>
+
+</div>
+
+
+
+
+
+<div class="summary-row">
+
+<span>
+
+تخفیف کل
+
+</span>
+
+<strong id="discountTotal">
+
+0 تومان
+
+</strong>
+
+</div>
+
+
+
+
+
+<div class="summary-row">
+
+<span>
+
+مالیات (9%)
+
+</span>
+
+<strong id="taxTotal">
+
+0 تومان
+
+</strong>
+
+</div>
+
+
+
+
+
+<div class="summary-row">
+
+<span>
+
+هزینه ارسال
+
+</span>
+
+<input
+type="number"
+id="shippingPrice"
+value="0">
+
+</div>
+
+
+
+
+
+<div class="summary-row total-price">
+
+<span>
+
+مبلغ نهایی
+
+</span>
+
+<strong id="finalPrice">
+
+0 تومان
+
+</strong>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        DESCRIPTION
+=====================================-->
+
+<section class="invoice-description">
+
+<h2>
+
+📝 توضیحات فاکتور
+
+</h2>
+
+<textarea
+
+id="invoiceDescription"
+
+rows="6"
+
+placeholder="توضیحات، شرایط پرداخت، توضیحات خدمات و ...">
+
+</textarea>
+
+</section>
+
+<!--====================================
+        ACTION BUTTONS
+=====================================-->
+
+<section class="invoice-actions">
+
+<button
+id="saveInvoice"
+class="action-btn save-btn">
+
+💾 ذخیره فاکتور
+
+</button>
+
+<button
+id="printInvoice"
+class="action-btn print-btn">
+
+🖨 چاپ
+
+</button>
+
+<button
+id="pdfInvoice"
+class="action-btn pdf-btn">
+
+📄 دانلود PDF
+
+</button>
+
+<button
+id="excelInvoice"
+class="action-btn excel-btn">
+
+📊 خروجی Excel
+
+</button>
+
+<button
+id="shareInvoice"
+class="action-btn share-btn">
+
+📤 اشتراک گذاری
+
+</button>
+
+<button
+id="clearInvoice"
+class="action-btn delete-btn">
+
+🗑 پاک کردن فرم
+
+</button>
+
+</section>
+
+
+
+
+
+<!--====================================
+        SAVED INVOICES
+=====================================-->
+
+<section class="saved-invoices">
+
+<div class="section-title">
+
+<h2>
+
+📂 فاکتورهای ذخیره شده
+
+</h2>
+
+<input
+
+type="text"
+
+id="searchInvoice"
+
+placeholder="🔍 جستجوی شماره یا مشتری">
+
+</div>
+
+
+
+
+
+<div class="table-responsive">
+
+<table class="saved-table">
+
+<thead>
+
+<tr>
+
+<th>
+
+شماره
+
+</th>
+
+<th>
+
+مشتری
+
+</th>
+
+<th>
+
+تاریخ
+
+</th>
+
+<th>
+
+مبلغ
+
+</th>
+
+<th>
+
+وضعیت
+
+</th>
+
+<th>
+
+عملیات
+
+</th>
+
+</tr>
+
+</thead>
+
+
+
+
+
+<tbody id="invoiceList">
+
+<!-- توسط جاوااسکریپت ساخته می‌شود -->
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        PREVIEW MODAL
+=====================================-->
+
+<div
+class="invoice-modal"
+id="invoiceModal">
+
+<div class="invoice-modal-box">
+
+<div class="modal-header">
+
+<h2>
+
+👁 پیش نمایش فاکتور
+
+</h2>
+
+<button
+id="closePreview">
+
+✕
+
+</button>
+
+</div>
+
+
+
+
+
+<div
+id="invoicePreview">
+
+<!-- محتوای فاکتور -->
+
+</div>
+
+
+
+
+
+<div class="modal-buttons">
+
+<button
+id="printPreview">
+
+🖨 چاپ
+
+</button>
+
+<button
+id="downloadPreviewPdf">
+
+📄 PDF
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+<!--====================================
+        SUCCESS MESSAGE
+=====================================-->
+
+<div
+id="invoiceMessage"
+class="invoice-message">
+
+✅ فاکتور با موفقیت ذخیره شد.
+
+</div>
+
+
+
+
+
+<!--====================================
+        LIBRARIES
+=====================================-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script src="invoice.js"></script>
+
+<script>
+
+window.addEventListener("load", function(){
+
+    const theme = localStorage.getItem("theme");
+
+    if(theme === "dark"){
+
+        document.body.classList.add("dark");
+
+    }else{
+
+        document.body.classList.remove("dark");
+
+    }
+
+});
+
+</script>
+
+
+
+</body>
+
+</html>

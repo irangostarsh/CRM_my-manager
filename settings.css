@@ -1,0 +1,435 @@
+/*====================================
+        RESET
+=====================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:tahoma,sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    direction:rtl;
+    color:#222;
+    transition:.3s;
+}
+
+a{
+    text-decoration:none;
+}
+
+/*====================================
+        HEADER
+=====================================*/
+
+.settings-header{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    margin:25px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.settings-header h1{
+
+    color:#1e40af;
+
+    margin-bottom:10px;
+
+}
+
+.settings-header p{
+
+    color:#777;
+
+}
+
+/*====================================
+        PROFILE CARD
+=====================================*/
+
+.profile-card{
+
+    background:white;
+
+    margin:25px;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    display:flex;
+
+    gap:40px;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+/*====================================
+        PROFILE IMAGE
+=====================================*/
+
+.profile-image{
+
+    width:220px;
+
+    text-align:center;
+
+}
+
+.profile-image img{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:6px solid #2563eb;
+
+}
+
+.profile-image input{
+
+    display:none;
+
+}
+
+.change-photo-btn{
+
+    display:block;
+
+    margin-top:18px;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+}
+
+/*====================================
+        FORM
+=====================================*/
+
+.profile-form{
+
+    flex:1;
+
+}
+
+.profile-form label{
+
+    display:block;
+
+    margin-top:20px;
+
+    margin-bottom:8px;
+
+    font-weight:bold;
+
+}
+
+.profile-form input{
+
+    width:100%;
+
+    height:50px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    font-size:15px;
+
+}
+
+.profile-form input:focus{
+
+    outline:none;
+
+    border-color:#2563eb;
+
+}
+
+/*====================================
+        THEME
+=====================================*/
+
+.theme-card{
+
+    background:white;
+
+    margin:25px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.theme-card h2{
+
+    margin-bottom:25px;
+
+    color:#1e40af;
+
+}
+
+.theme-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+/*====================================
+        SWITCH
+=====================================*/
+
+.switch{
+
+    position:relative;
+
+    width:60px;
+
+    height:30px;
+
+}
+
+.switch input{
+
+    display:none;
+
+}
+
+.slider{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#ccc;
+
+    border-radius:30px;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.slider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:24px;
+
+    height:24px;
+
+    left:3px;
+
+    top:3px;
+
+    background:white;
+
+    border-radius:50%;
+
+    transition:.3s;
+
+}
+
+.switch input:checked + .slider{
+
+    background:#2563eb;
+
+}
+
+.switch input:checked + .slider::before{
+
+    transform:translateX(30px);
+
+}
+
+/*====================================
+        SAVE
+=====================================*/
+
+.save-section{
+
+    text-align:center;
+
+    margin:30px;
+
+}
+
+#saveSettings{
+
+    background:#16a34a;
+
+    color:white;
+
+    border:none;
+
+    padding:16px 40px;
+
+    border-radius:15px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+#saveSettings:hover{
+
+    background:#15803d;
+
+}
+
+/*====================================
+        MESSAGE
+=====================================*/
+
+.save-message{
+
+    position:fixed;
+
+    bottom:30px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:#16a34a;
+
+    color:white;
+
+    padding:15px 30px;
+
+    border-radius:15px;
+
+    display:none;
+
+    z-index:9999;
+
+}
+
+/*====================================
+        DARK MODE
+=====================================*/
+
+body.dark{
+
+    background:#0f172a;
+
+    color:white;
+
+}
+
+body.dark .settings-header,
+
+body.dark .profile-card,
+
+body.dark .theme-card{
+
+    background:#1e293b;
+
+    color:white;
+
+}
+
+body.dark input{
+
+    background:#334155;
+
+    color:white;
+
+    border:1px solid #475569;
+
+}
+
+body.dark input::placeholder{
+
+    color:#cbd5e1;
+
+}
+
+/*====================================
+        MOBILE
+=====================================*/
+
+@media(max-width:768px){
+
+.profile-card{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.profile-image{
+
+    width:100%;
+
+}
+
+.profile-form{
+
+    width:100%;
+
+}
+
+.settings-header,
+
+.profile-card,
+
+.theme-card{
+
+    margin:15px;
+
+    padding:20px;
+
+}
+
+#saveSettings{
+
+    width:100%;
+
+}
+
+}

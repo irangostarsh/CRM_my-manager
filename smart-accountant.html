@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+🧠 مدیر مالی هوشمند
+
+</title>
+
+<link rel="stylesheet"
+href="smart-accountant.css">
+
+</head>
+
+<body>
+
+
+
+<!--==========================
+        HEADER
+===========================-->
+
+<section class="smart-header">
+
+<div>
+
+<h1>
+
+🧠 مدیر مالی هوشمند
+
+</h1>
+
+<p>
+
+تحلیل کامل وضعیت مالی کسب و کار
+
+</p>
+
+</div>
+
+<div>
+
+<button id="refreshAI">
+
+🔄 بروزرسانی تحلیل
+
+</button>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--==========================
+        OVERVIEW
+===========================-->
+
+<section class="overview-grid">
+
+<div class="overview-card income">
+
+<h3>
+
+💰 درآمد امروز
+
+</h3>
+
+<h2 id="todayIncome">
+
+۰ تومان
+
+</h2>
+
+<span>
+
+امروز
+
+</span>
+
+</div>
+
+
+
+
+
+<div class="overview-card month">
+
+<h3>
+
+📅 درآمد این ماه
+
+</h3>
+
+<h2 id="monthIncome">
+
+۰ تومان
+
+</h2>
+
+<span>
+
+۳۰ روز اخیر
+
+</span>
+
+</div>
+
+
+
+
+
+<div class="overview-card profit">
+
+<h3>
+
+📈 سود کل
+
+</h3>
+
+<h2 id="totalProfit">
+
+۰ تومان
+
+</h2>
+
+<span>
+
+سود خالص
+
+</span>
+
+</div>
+
+
+
+
+
+<div class="overview-card invoice">
+
+<h3>
+
+📄 تعداد فاکتورها
+
+</h3>
+
+<h2 id="invoiceCount">
+
+۰
+
+</h2>
+
+<span>
+
+ثبت شده
+
+</span>
+
+</div>
+
+</section>
+
+
+
+
+
+
+<!--==========================
+        AI ANALYSIS
+===========================-->
+
+<section class="analysis-box">
+
+<div class="box-header">
+
+<h2>
+
+🤖 تحلیل هوشمند
+
+</h2>
+
+</div>
+
+<div
+id="analysisResult">
+
+<p>
+
+هنوز تحلیلی انجام نشده است.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+
+
+
+
+<!--==========================
+        WARNINGS
+===========================-->
+
+<section class="warning-box">
+
+<div class="box-header">
+
+<h2>
+
+⚠ هشدارها
+
+</h2>
+
+</div>
+
+<div
+id="warningList">
+
+<div class="warning-item">
+
+هیچ هشداری وجود ندارد.
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+
+
+<!--==========================
+        SUGGESTIONS
+===========================-->
+
+<section class="suggestion-box">
+
+<div class="box-header">
+
+<h2>
+
+💡 پیشنهادهای هوشمند
+
+</h2>
+
+</div>
+
+<div
+id="suggestionList">
+
+<div class="suggestion-item">
+
+هنوز پیشنهادی ثبت نشده است.
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+
+
+<!--==========================
+        QUICK REPORT
+===========================-->
+
+<section class="quick-report">
+
+<div class="box-header">
+
+<h2>
+
+📊 گزارش سریع
+
+</h2>
+
+</div>
+
+<div class="report-grid">
+
+<div>
+
+<span>
+
+پرداخت شده
+
+</span>
+
+<h3 id="paidInvoices">
+
+۰
+
+</h3>
+
+</div>
+
+<div>
+
+<span>
+
+پرداخت نشده
+
+</span>
+
+<h3 id="unpaidInvoices">
+
+۰
+
+</h3>
+
+</div>
+
+<div>
+
+<span>
+
+مشتریان
+
+</span>
+
+<h3 id="customerCount">
+
+۰
+
+</h3>
+
+</div>
+
+<div>
+
+<span>
+
+میانگین فروش
+
+</span>
+
+<h3 id="averageSale">
+
+۰
+
+</h3>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+
+<script src="smart-accountant.js"></script>
+
+</body>
+
+</html>

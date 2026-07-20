@@ -1,0 +1,1521 @@
+/*======================================
+            RESET
+======================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:tahoma,sans-serif;
+}
+
+body{
+
+    direction:rtl;
+
+    background:#f3f6fb;
+
+    color:#333;
+
+    padding:25px;
+
+}
+
+button{
+
+    cursor:pointer;
+
+    border:none;
+
+    transition:.3s;
+
+}
+
+h1,h2,h3{
+
+    font-weight:bold;
+
+}
+
+section{
+
+    margin-bottom:25px;
+
+}
+
+
+/*======================================
+            HEADER
+======================================*/
+
+.smart-header{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.smart-header h1{
+
+    color:#2563eb;
+
+    margin-bottom:10px;
+
+    font-size:32px;
+
+}
+
+.smart-header p{
+
+    color:#777;
+
+}
+
+#refreshAI{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:14px 24px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+}
+
+#refreshAI:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+/*======================================
+        OVERVIEW CARDS
+======================================*/
+
+.overview-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
+
+}
+
+.overview-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.overview-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.overview-card h3{
+
+    color:#666;
+
+    margin-bottom:15px;
+
+}
+
+.overview-card h2{
+
+    font-size:30px;
+
+    margin-bottom:10px;
+
+}
+
+.overview-card span{
+
+    color:#999;
+
+}
+
+.income{
+
+    border-right:6px solid #22c55e;
+
+}
+
+.month{
+
+    border-right:6px solid #3b82f6;
+
+}
+
+.profit{
+
+    border-right:6px solid #f59e0b;
+
+}
+
+.invoice{
+
+    border-right:6px solid #ef4444;
+
+}
+
+
+/*======================================
+        BOXES
+======================================*/
+
+.analysis-box,
+
+.warning-box,
+
+.suggestion-box,
+
+.quick-report{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.box-header{
+
+    margin-bottom:20px;
+
+}
+
+.box-header h2{
+
+    color:#1e40af;
+
+}
+
+
+/*======================================
+        ANALYSIS
+======================================*/
+
+#analysisResult{
+
+    line-height:2;
+
+    font-size:15px;
+
+    color:#444;
+
+}
+
+
+/*======================================
+        WARNING
+======================================*/
+
+.warning-item{
+
+    background:#fff7ed;
+
+    border-right:5px solid orange;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-bottom:10px;
+
+}
+
+
+/*======================================
+        SUGGESTIONS
+======================================*/
+
+.suggestion-item{
+
+    background:#ecfdf5;
+
+    border-right:5px solid #16a34a;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-bottom:10px;
+
+}
+
+
+/*======================================
+        REPORT GRID
+======================================*/
+
+.report-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:20px;
+
+}
+
+.report-grid div{
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+.report-grid span{
+
+    color:#777;
+
+}
+
+.report-grid h3{
+
+    margin-top:10px;
+
+    color:#2563eb;
+
+    font-size:28px;
+
+}
+
+
+/*======================================
+        MOBILE
+======================================*/
+
+@media(max-width:768px){
+
+.smart-header{
+
+    flex-direction:column;
+
+    text-align:center;
+
+    gap:20px;
+
+}
+
+.overview-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.report-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+
+/*======================================
+            CHARTS
+======================================*/
+
+.charts-section{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+}
+
+.chart-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.chart-card h2{
+
+    color:#2563eb;
+
+    margin-bottom:20px;
+
+}
+
+.chart-card canvas{
+
+    width:100% !important;
+
+    height:320px !important;
+
+}
+
+
+
+
+
+/*======================================
+        TABLES
+======================================*/
+
+.top-customers,
+
+.top-products{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.smart-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.smart-table thead{
+
+    background:#2563eb;
+
+    color:#fff;
+
+}
+
+.smart-table th{
+
+    padding:15px;
+
+    text-align:center;
+
+}
+
+.smart-table td{
+
+    padding:15px;
+
+    text-align:center;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.smart-table tbody tr{
+
+    transition:.3s;
+
+}
+
+.smart-table tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+
+
+
+
+/*======================================
+        FINANCIAL STATUS
+======================================*/
+
+.financial-status{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+}
+
+.status-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.status-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.status-card h3{
+
+    color:#666;
+
+    margin-bottom:15px;
+
+}
+
+.status-card h2{
+
+    color:#16a34a;
+
+    font-size:28px;
+
+}
+
+
+
+
+
+/*======================================
+        SALES COMPARE
+======================================*/
+
+.compare-box{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    margin-bottom:25px;
+
+}
+
+.compare-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+.compare-grid div{
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    text-align:center;
+
+}
+
+.compare-grid span{
+
+    color:#666;
+
+}
+
+.compare-grid h2{
+
+    margin-top:15px;
+
+    color:#2563eb;
+
+    font-size:30px;
+
+}
+
+
+
+
+
+/*======================================
+        TABLE SCROLL
+======================================*/
+
+.top-customers,
+
+.top-products{
+
+    overflow-x:auto;
+
+}
+
+.smart-table{
+
+    min-width:700px;
+
+}
+
+
+
+
+
+/*======================================
+        MOBILE
+======================================*/
+
+@media(max-width:768px){
+
+.charts-section{
+
+    grid-template-columns:1fr;
+
+}
+
+.financial-status{
+
+    grid-template-columns:1fr;
+
+}
+
+.compare-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.chart-card canvas{
+
+    height:250px !important;
+
+}
+
+}
+
+/*======================================
+        AI CHAT
+======================================*/
+
+.ai-chat-section{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.chat-box{
+
+    height:350px;
+
+    overflow-y:auto;
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+}
+
+.ai-message{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    width:fit-content;
+
+    max-width:80%;
+
+    margin-bottom:15px;
+
+    line-height:2;
+
+}
+
+.user-message{
+
+    background:#16a34a;
+
+    color:#fff;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    width:fit-content;
+
+    max-width:80%;
+
+    margin-right:auto;
+
+    margin-bottom:15px;
+
+    line-height:2;
+
+}
+
+.chat-input{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.chat-input input{
+
+    flex:1;
+
+    padding:15px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    outline:none;
+
+}
+
+.chat-input input:focus{
+
+    border-color:#2563eb;
+
+}
+
+.chat-input button{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:15px 25px;
+
+    border-radius:12px;
+
+}
+
+.chat-input button:hover{
+
+    background:#1d4ed8;
+
+}
+
+
+
+
+
+/*======================================
+        HEALTH
+======================================*/
+
+.health-section{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.health-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:30px;
+
+}
+
+.health-circle{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#22c55e,#16a34a);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:40px;
+
+    font-weight:bold;
+
+}
+
+.health-info h3{
+
+    margin-bottom:10px;
+
+    color:#2563eb;
+
+}
+
+.health-info p{
+
+    font-size:22px;
+
+    color:#16a34a;
+
+}
+
+
+
+
+
+/*======================================
+        PREDICTION
+======================================*/
+
+.prediction-section{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.prediction-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+.prediction-grid div{
+
+    background:#eff6ff;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    text-align:center;
+
+}
+
+.prediction-grid h2{
+
+    color:#2563eb;
+
+    margin-top:15px;
+
+}
+
+
+
+
+
+/*======================================
+        TASKS
+======================================*/
+
+.tasks-section{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.task-item{
+
+    padding:15px;
+
+    background:#f8fafc;
+
+    border-right:5px solid #22c55e;
+
+    border-radius:12px;
+
+    margin-bottom:12px;
+
+}
+
+
+
+
+
+/*======================================
+        NOTIFICATIONS
+======================================*/
+
+.notification-section{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.notification-item{
+
+    padding:15px;
+
+    background:#fff7ed;
+
+    border-right:5px solid orange;
+
+    border-radius:12px;
+
+    margin-bottom:12px;
+
+}
+
+
+
+
+
+/*======================================
+        BEST DAY
+======================================*/
+
+.best-day-section{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.best-day-card{
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color:#fff;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-align:center;
+
+}
+
+.best-day-card h1{
+
+    font-size:45px;
+
+    margin-bottom:15px;
+
+}
+
+.best-day-card h2{
+
+    margin-top:15px;
+
+}
+
+
+
+
+
+/*======================================
+        AI STATUS
+======================================*/
+
+.ai-status{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+.status-item{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.status-item h3{
+
+    color:#2563eb;
+
+    margin-bottom:15px;
+
+}
+
+.status-item p{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#16a34a;
+
+}
+
+
+
+
+
+/*======================================
+        MOBILE
+======================================*/
+
+@media(max-width:768px){
+
+.chat-input{
+
+    flex-direction:column;
+
+}
+
+.chat-input button{
+
+    width:100%;
+
+}
+
+.health-card{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.health-circle{
+
+    width:130px;
+
+    height:130px;
+
+    font-size:32px;
+
+}
+
+.prediction-grid,
+
+.ai-status{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+
+/*======================================
+        CALENDAR
+======================================*/
+
+.calendar-section{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.calendar-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+.calendar-card{
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+.calendar-card h3{
+
+    color:#2563eb;
+
+    margin-bottom:10px;
+
+}
+
+.calendar-card p{
+
+    color:#555;
+
+}
+
+
+
+
+
+/*======================================
+        GOALS
+======================================*/
+
+.goal-section{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.goal-card{
+
+    text-align:center;
+
+}
+
+.goal-card progress{
+
+    width:100%;
+
+    height:22px;
+
+    margin:20px 0;
+
+}
+
+
+
+
+
+/*======================================
+        FINAL REPORT
+======================================*/
+
+.report-section{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+#finalReport{
+
+    background:#f8fafc;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    line-height:2.2;
+
+}
+
+
+
+
+
+/*======================================
+        QUICK BUTTONS
+======================================*/
+
+.quick-actions{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+}
+
+.quick-actions button{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+}
+
+.quick-actions button:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-3px);
+
+}
+
+
+
+
+
+/*======================================
+        FOOTER
+======================================*/
+
+.smart-footer{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    text-align:center;
+
+    color:#666;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+
+
+
+
+/*======================================
+        DARK MODE
+======================================*/
+
+body.dark{
+
+    background:#0f172a;
+
+    color:#fff;
+
+}
+
+body.dark section,
+
+body.dark .chart-card,
+
+body.dark .status-card,
+
+body.dark .calendar-card,
+
+body.dark .goal-card,
+
+body.dark .report-grid div,
+
+body.dark .prediction-grid div,
+
+body.dark .task-item,
+
+body.dark .notification-item,
+
+body.dark .smart-footer{
+
+    background:#1e293b;
+
+    color:#fff;
+
+}
+
+body.dark input{
+
+    background:#334155;
+
+    color:#fff;
+
+    border:1px solid #475569;
+
+}
+
+body.dark .smart-table td{
+
+    border-color:#475569;
+
+}
+
+body.dark .smart-table tbody tr:hover{
+
+    background:#334155;
+
+}
+
+body.dark .chat-box{
+
+    background:#0f172a;
+
+}
+
+
+
+
+
+/*======================================
+        PRINT
+======================================*/
+
+@media print{
+
+body{
+
+    background:#fff;
+
+    padding:0;
+
+}
+
+.quick-actions,
+
+.chat-input,
+
+#refreshAI{
+
+    display:none;
+
+}
+
+section{
+
+    box-shadow:none;
+
+    border:1px solid #ddd;
+
+    break-inside:avoid;
+
+}
+
+}
+
+
+
+
+
+/*======================================
+        MOBILE
+======================================*/
+
+@media(max-width:768px){
+
+.calendar-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.quick-actions{
+
+    grid-template-columns:1fr;
+
+}
+
+.quick-actions button{
+
+    width:100%;
+
+}
+
+.smart-header{
+
+    padding:20px;
+
+}
+
+.chart-card canvas{
+
+    height:220px !important;
+
+}
+
+}
+
+
+body.dark{
+
+    background:#0f172a;
+
+    color:#fff;
+
+}
+
+body.dark .sidebar{
+
+    background:#0f172a;
+
+}
+
+body.dark .logo{
+
+    background:#020617;
+
+}
+
+body.dark .content{
+
+    background:#111827;
+
+}
+
+body.dark .card,
+
+body.dark .form-box,
+
+body.dark .table-box,
+
+body.dark .bank-section,
+
+body.dark .notes-section{
+
+    background:#1e293b;
+
+    color:#fff;
+
+}
+
+body.dark input,
+body.dark textarea,
+body.dark select{
+
+    background:#334155;
+
+    color:#fff;
+
+    border:1px solid #475569;
+
+}
+
+body.dark table{
+
+    color:#fff;
+
+}
+
+body.dark tbody tr{
+
+    background:#1e293b;
+
+}
+
+body.dark tbody tr:hover{
+
+    background:#334155;
+
+}
