@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>وضعیت مشتریان</title>
+
+<link rel="stylesheet" href="customer-status.css">
+
+</head>
+
+<body>
+
+<!--=========================
+        Menu Button
+==========================-->
+
+<button class="menu-btn" onclick="toggleMenu()">
+
+☰
+
+</button>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<!--=========================
+        Sidebar
+==========================-->
+
+<aside class="sidebar" id="sidebar">
+
+<div class="logo">
+
+CRM PANEL
+
+</div>
+
+<ul>
+<li><a href="/dashbord/dashboard.html">🏠 داشبورد</a></li>
+<li><a href="manange moshtare.html">👤 مشتریان</a></li>
+<li><a href="orders.html">📦 سفارشات</a></li>
+<li><a href="contracts.html">📄 قراردادها</a></li>
+<li><a href="projects.html">مدیریت پروزه ها</a></li>
+<li><a href="customer-status.html">📞 وضعیت مشتریان</a></li>
+<li class="active"><a href="tasks.html">✅ مدیریت کارها</a></li>
+<li><a href="reports.html">📊 گزارشات</a></li>
+<li><a href=" calculator.html">🧮 ماشین حساب</a></li>
+<li><a href="#">⚙ تنظیمات</a></li>
+<li><a href="#">🚪 خروج</a></li>
+</ul>
+
+</aside>
+
+<!--=========================
+        Content
+==========================-->
+
+<div class="content">
+
+<h1>
+
+📞 مدیریت وضعیت مشتریان
+
+</h1>
+
+<!--=========================
+        Cards
+==========================-->
+
+<div class="cards">
+
+<div class="card">
+
+<h2 id="allCustomers">
+
+0
+
+</h2>
+
+<p>
+
+کل مشتریان
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="acceptedCount">
+
+0
+
+</h2>
+
+<p>
+
+قبول کرده
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="halfCount">
+
+0
+
+</h2>
+
+<p>
+
+50 / 50
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="cancelCount">
+
+0
+
+</h2>
+
+<p>
+
+کنسل شده
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="followCount">
+
+0
+
+</h2>
+
+<p>
+
+نیاز به پیگیری
+
+</p>
+
+</div>
+
+</div>
+
+<!--=========================
+        Form
+==========================-->
+
+<div class="form-box">
+
+<h2>
+
+ثبت وضعیت مشتری
+
+</h2>
+
+<form id="statusForm">
+
+<div class="grid">
+
+<div>
+
+<label>
+
+نام و نام خانوادگی
+
+</label>
+
+<input
+type="text"
+id="fullName"
+required>
+
+</div>
+
+<div>
+
+<label>
+
+شماره موبایل
+
+</label>
+
+<input
+type="tel"
+id="mobile"
+required>
+
+</div>
+
+<div>
+
+<label>
+
+نام برند
+
+</label>
+
+<input
+type="text"
+id="brand">
+
+</div>
+
+<div>
+
+<label>
+
+وضعیت مشتری
+
+</label>
+
+<select id="status">
+
+<option>قبول کرده</option>
+
+<option>50 / 50</option>
+
+<option>در حال مذاکره</option>
+
+<option>نیاز به پیگیری</option>
+
+<option>کنسل شده</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+آخرین تماس
+
+</label>
+
+<input
+type="date"
+id="lastCall">
+
+</div>
+
+<div>
+
+<label>
+
+تماس بعدی
+
+</label>
+
+<input
+type="date"
+id="nextCall">
+
+</div>
+
+<div>
+
+<label>
+
+مسئول فروش
+
+</label>
+
+<input
+type="text"
+id="seller">
+
+</div>
+
+<div>
+
+<label>
+
+روش آشنایی
+
+</label>
+
+<select id="source">
+
+<option>اینستاگرام</option>
+
+<option>گوگل</option>
+
+<option>سایت</option>
+
+<option>تبلیغات</option>
+
+<option>معرفی دوستان</option>
+
+<option>تماس مستقیم</option>
+
+<option>سایر</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+مبلغ پیشنهادی (تومان)
+
+</label>
+
+<input
+type="number"
+id="price">
+
+</div>
+
+<div style="grid-column:1/-1;">
+
+<label>
+
+توضیحات
+
+</label>
+
+<textarea
+id="description"
+rows="5"
+placeholder="توضیحات..."></textarea>
+
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button
+type="submit"
+id="saveBtn">
+
+ثبت اطلاعات
+
+</button>
+
+<button
+type="reset">
+
+پاک کردن
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<!--=========================
+        Search
+==========================-->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="جستجو بر اساس نام، شماره موبایل، برند یا مسئول فروش...">
+
+</div>
+
+<!--=========================
+        Table
+==========================-->
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ردیف</th>
+
+<th>نام مشتری</th>
+
+<th>شماره موبایل</th>
+
+<th>نام برند</th>
+
+<th>وضعیت</th>
+
+<th>آخرین تماس</th>
+
+<th>تماس بعدی</th>
+
+<th>مسئول فروش</th>
+
+<th>مبلغ پیشنهادی</th>
+
+<th>عملیات</th>
+
+</tr>
+
+</thead>
+
+<tbody id="statusTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!--=========================
+        Pagination
+==========================-->
+
+<div
+class="pagination"
+id="pagination">
+
+</div>
+
+</div>
+
+<!--=========================
+        Details Modal
+==========================-->
+
+<div
+class="modal-overlay"
+id="modalOverlay"
+onclick="closeModal()">
+
+</div>
+
+<div
+class="modal"
+id="detailsModal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>
+
+جزئیات مشتری
+
+</h2>
+
+<button
+class="close-btn"
+onclick="closeModal()">
+
+✕
+
+</button>
+
+</div>
+
+<div
+class="modal-body"
+id="modalBody">
+
+</div>
+
+</div>
+
+</div>
+
+<!--=========================
+        Sidebar Script
+==========================-->
+
+<script>
+
+function toggleMenu(){
+
+document
+.getElementById("sidebar")
+.classList.toggle("active");
+
+document
+.getElementById("overlay")
+.classList.toggle("active");
+
+}
+
+</script>
+
+<!--=========================
+        Main Script
+==========================-->
+
+<script src="customer-status.js"></script>
+
+</body>
+
+</html>
+

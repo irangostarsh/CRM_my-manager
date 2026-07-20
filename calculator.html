@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+ماشین حساب
+</title>
+
+
+<link rel="stylesheet" href="calculator.css">
+
+
+</head>
+
+<style>
+    /*====================================
+        RESET
+====================================*/
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+    font-family:tahoma,sans-serif;
+
+}
+
+
+body{
+
+    direction:rtl;
+
+    min-height:100vh;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #1e3a8a,
+
+    #2563eb
+
+    );
+
+}
+
+
+
+
+
+/*====================================
+        PAGE
+====================================*/
+
+
+.calculator-page{
+
+
+    width:100%;
+
+    min-height:100vh;
+
+    padding:30px;
+
+}
+
+
+
+
+/*====================================
+        HEADER
+====================================*/
+
+
+.calculator-header{
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    color:white;
+
+    margin-bottom:30px;
+
+
+}
+
+
+
+.calculator-header a{
+
+
+    background:white;
+
+    color:#1e3a8a;
+
+    padding:12px 20px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+}
+
+
+
+
+
+
+/*====================================
+        CALCULATOR BOX
+====================================*/
+
+
+.calculator-box{
+
+
+    width:400px;
+
+    max-width:100%;
+
+    margin:auto;
+
+    background:
+
+    rgba(255,255,255,.15);
+
+    backdrop-filter:blur(15px);
+
+    padding:25px;
+
+    border-radius:25px;
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.3);
+
+
+}
+
+
+
+
+
+
+/*====================================
+        DISPLAY
+====================================*/
+
+
+.display-box{
+
+
+    background:#111827;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+#historyDisplay{
+
+
+    height:25px;
+
+    color:#9ca3af;
+
+    font-size:14px;
+
+}
+
+
+
+#display{
+
+
+    width:100%;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    color:white;
+
+    font-size:35px;
+
+    text-align:left;
+
+    direction:ltr;
+
+
+}
+
+
+
+
+
+
+
+
+/*====================================
+        BUTTONS
+====================================*/
+
+
+.buttons-grid{
+
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(4,1fr);
+
+    gap:12px;
+
+
+}
+
+
+
+
+
+.buttons-grid button{
+
+
+    height:65px;
+
+    border:none;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    background:white;
+
+    color:#111827;
+
+    transition:.2s;
+
+
+}
+
+
+
+
+.buttons-grid button:hover{
+
+
+    transform:scale(1.05);
+
+}
+
+
+
+.buttons-grid .operator{
+
+
+    background:#2563eb;
+
+    color:white;
+
+
+}
+
+
+
+
+.buttons-grid .equal{
+
+
+    background:#16a34a;
+
+    color:white;
+
+    grid-column:span 2;
+
+
+}
+
+
+
+
+.buttons-grid .clear{
+
+
+    background:#ef4444;
+
+    color:white;
+
+
+}
+
+
+
+
+.buttons-grid .delete{
+
+
+    background:#f59e0b;
+
+    color:white;
+
+
+}
+
+
+
+
+
+.buttons-grid .zero{
+
+
+    grid-column:span 2;
+
+
+}
+
+
+
+
+
+
+
+/*====================================
+        HISTORY
+====================================*/
+
+
+.history-section{
+
+
+    max-width:600px;
+
+    margin:40px auto;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+
+}
+
+
+
+.history-header{
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+
+.history-header button{
+
+
+    background:#ef4444;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+
+}
+
+
+
+
+
+.history-item{
+
+
+    background:#f1f5f9;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    margin-bottom:10px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+
+}
+
+
+
+
+
+
+/*====================================
+        MOBILE
+====================================*/
+
+
+@media(max-width:600px){
+
+
+.calculator-page{
+
+    padding:15px;
+
+}
+
+
+
+.calculator-header{
+
+
+    flex-direction:column;
+
+    gap:15px;
+
+
+}
+
+
+
+.buttons-grid button{
+
+
+    height:55px;
+
+    font-size:18px;
+
+
+}
+
+
+
+#display{
+
+
+    font-size:28px;
+
+
+}
+
+
+}
+
+
+</style>
+
+<body>
+
+
+<div class="calculator-page">
+
+
+
+<!-- HEADER -->
+
+<header class="calculator-header">
+
+
+<h1>
+🧮 ماشین حساب
+</h1>
+
+
+<a href="dashboard.html">
+
+⬅ بازگشت به داشبورد
+
+</a>
+
+
+</header>
+
+
+
+
+
+
+
+<!-- CALCULATOR BOX -->
+
+
+<section class="calculator-box">
+
+
+
+
+
+<!-- DISPLAY -->
+
+
+<div class="display-box">
+
+
+<div id="historyDisplay">
+
+</div>
+
+
+
+<input
+
+type="text"
+
+id="display"
+
+readonly
+
+value="0">
+
+
+</div>
+
+
+
+
+
+
+
+<!-- BUTTONS -->
+
+
+<div class="buttons-grid">
+
+
+
+<button class="clear">
+
+C
+
+</button>
+
+
+
+<button class="delete">
+
+⌫
+
+</button>
+
+
+
+<button>
+
+%
+
+</button>
+
+
+
+<button class="operator">
+
+÷
+
+</button>
+
+
+
+
+
+
+
+
+<button>
+
+7
+
+</button>
+
+
+
+<button>
+
+8
+
+</button>
+
+
+
+<button>
+
+9
+
+</button>
+
+
+
+<button class="operator">
+
+×
+
+</button>
+
+
+
+
+
+
+
+
+<button>
+
+4
+
+</button>
+
+
+
+<button>
+
+5
+
+</button>
+
+
+
+<button>
+
+6
+
+</button>
+
+
+
+<button class="operator">
+
+-
+
+</button>
+
+
+
+
+
+
+
+
+<button>
+
+1
+
+</button>
+
+
+
+<button>
+
+2
+
+</button>
+
+
+
+<button>
+
+3
+
+</button>
+
+
+
+<button class="operator">
+
++
+
+</button>
+
+
+
+
+
+
+
+
+<button class="zero">
+
+0
+
+</button>
+
+
+
+<button>
+
+.
+
+</button>
+
+
+
+<button class="equal">
+
+=
+
+</button>
+
+
+
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
+
+<!--========================
+        HISTORY SECTION
+=========================-->
+
+
+<section class="history-section">
+
+
+<div class="history-header">
+
+
+<h2>
+
+📜 تاریخچه محاسبات
+
+</h2>
+
+
+
+<button
+
+id="clearHistory">
+
+🗑 پاک کردن
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+<div
+
+id="historyList"
+
+class="history-list">
+
+
+
+<!-- محاسبات اینجا ساخته می‌شوند -->
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+    
+
+//====================================
+// VARIABLES
+//====================================
+
+
+let currentInput = "";
+
+let history = JSON.parse(
+
+localStorage.getItem("calculatorHistory")
+
+) || [];
+
+
+
+const display =
+
+document.getElementById("display");
+
+
+
+const historyList =
+
+document.getElementById("historyList");
+
+
+
+
+
+
+
+//====================================
+// BUTTONS
+//====================================
+
+
+const buttons =
+
+document.querySelectorAll(
+
+".buttons-grid button"
+
+);
+
+
+
+
+
+
+buttons.forEach(button=>{
+
+
+
+button.addEventListener(
+
+"click",
+
+()=>{
+
+
+
+let value = button.innerText;
+
+
+
+
+
+
+// CLEAR
+
+if(value==="C"){
+
+
+clearDisplay();
+
+
+return;
+
+
+}
+
+
+
+
+
+// DELETE
+
+if(value==="⌫"){
+
+
+deleteNumber();
+
+
+return;
+
+
+}
+
+
+
+
+
+// RESULT
+
+if(value==="="){
+
+
+calculateResult();
+
+
+return;
+
+
+}
+
+
+
+
+
+// PERCENT
+
+if(value==="%"){
+
+
+percentage();
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+// OPERATORS
+
+if(
+
+value==="+" ||
+
+value==="-" ||
+
+value==="×" ||
+
+value==="÷"
+
+){
+
+
+addOperator(value);
+
+
+return;
+
+
+}
+
+
+
+
+
+
+// NUMBERS
+
+addNumber(value);
+
+
+
+
+}
+
+
+
+);
+
+
+
+});
+
+
+
+
+
+
+
+
+
+//====================================
+// ADD NUMBER
+//====================================
+
+
+function addNumber(number){
+
+
+
+if(currentInput==="0")
+
+currentInput="";
+
+
+
+currentInput += number;
+
+
+
+updateDisplay();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+//====================================
+// OPERATORS
+//====================================
+
+
+function addOperator(operator){
+
+
+
+if(currentInput==="")
+
+return;
+
+
+
+currentInput += operator;
+
+
+
+updateDisplay();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+//====================================
+// DISPLAY
+//====================================
+
+
+function updateDisplay(){
+
+
+
+display.value = currentInput || "0";
+
+
+}
+
+
+
+
+
+
+
+
+
+//====================================
+// CLEAR
+//====================================
+
+
+function clearDisplay(){
+
+
+
+currentInput="";
+
+updateDisplay();
+
+
+
+}
+
+
+
+
+
+
+
+
+//====================================
+// DELETE LAST
+//====================================
+
+
+function deleteNumber(){
+
+
+
+currentInput =
+
+currentInput.slice(0,-1);
+
+
+
+updateDisplay();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+//====================================
+// PERCENT
+//====================================
+
+
+function percentage(){
+
+
+
+try{
+
+
+currentInput =
+
+String(
+
+eval(currentInput)
+
+/100
+
+);
+
+
+
+updateDisplay();
+
+
+
+}
+
+catch{
+
+
+clearDisplay();
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+//====================================
+// CALCULATE
+//====================================
+
+
+function calculateResult(){
+
+
+
+try{
+
+
+let result =
+
+eval(
+
+currentInput
+
+.replaceAll("×","*")
+
+.replaceAll("÷","/")
+
+);
+
+
+
+
+
+addHistory(
+
+currentInput,
+
+result
+
+);
+
+
+
+
+
+currentInput =
+
+String(result);
+
+
+
+
+
+updateDisplay();
+
+
+
+}
+
+catch{
+
+
+display.value="خطا";
+
+
+currentInput="";
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+//====================================
+// HISTORY SAVE
+//====================================
+
+
+function addHistory(expression,result){
+
+
+
+let item={
+
+
+expression:expression,
+
+result:result,
+
+date:new Date()
+
+.toLocaleString("fa-IR")
+
+
+};
+
+
+
+
+history.unshift(item);
+
+
+
+
+localStorage.setItem(
+
+"calculatorHistory",
+
+JSON.stringify(history)
+
+);
+
+
+
+renderHistory();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+//====================================
+// SHOW HISTORY
+//====================================
+
+
+function renderHistory(){
+
+
+
+historyList.innerHTML="";
+
+
+
+
+history.forEach(item=>{
+
+
+
+let div=document.createElement("div");
+
+
+
+div.className="history-item";
+
+
+
+
+div.innerHTML=`
+
+
+<span>
+
+${item.expression}
+
+=
+
+${item.result}
+
+</span>
+
+
+
+<small>
+
+${item.date}
+
+</small>
+
+
+
+`;
+
+
+
+
+
+historyList.appendChild(div);
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+//====================================
+// CLEAR HISTORY
+//====================================
+
+
+document
+
+.getElementById("clearHistory")
+
+.onclick=function(){
+
+
+
+if(confirm("تاریخچه پاک شود؟")){
+
+
+
+history=[];
+
+
+
+localStorage.removeItem(
+
+"calculatorHistory"
+
+);
+
+
+
+renderHistory();
+
+
+
+}
+
+
+
+};
+
+
+
+
+
+
+
+
+//====================================
+// START
+//====================================
+
+
+renderHistory();
+
+updateDisplay();
+</script>
+
+
+</body>
+
+</html>

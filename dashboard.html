@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#1e3a8a">
+<title>
+داشبورد مدیریت
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<style>
+    /* =========================
+   MOBILE SIDEBAR FIX
+========================= */
+
+
+.menu-btn{
+
+    display:none;
+
+    position:fixed;
+
+    top:15px;
+
+    right:15px;
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#1e3a8a;
+
+    color:white;
+
+    font-size:25px;
+
+    cursor:pointer;
+
+    z-index:3000;
+
+}
+
+
+
+.overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.5);
+
+    display:none;
+
+    z-index:1500;
+
+}
+
+
+
+.overlay.active{
+
+    display:block;
+
+}
+
+
+
+
+@media(max-width:768px){
+
+
+.menu-btn{
+
+    display:block;
+
+}
+
+
+
+.sidebar{
+
+
+    right:-270px;
+
+    width:250px;
+
+    transition:.35s ease;
+
+    z-index:2000;
+
+
+}
+
+
+
+.sidebar.active{
+
+
+    right:0;
+
+
+}
+
+
+
+.content{
+
+
+    margin-right:0 !important;
+
+    width:100%;
+
+    padding:80px 15px 20px;
+
+
+}
+
+
+
+
+body{
+
+    overflow-x:hidden;
+
+}
+
+
+}
+
+
+
+
+
+@media(max-width:400px){
+
+
+.sidebar{
+
+    width:220px;
+
+}
+
+
+}
+</style>
+
+<body>
+
+
+<!--========================
+ MOBILE MENU
+=========================-->
+
+<button class="menu-btn" onclick="toggleMenu()">
+☰
+</button>
+
+
+<div 
+class="overlay"
+id="overlay"
+onclick="toggleMenu()">
+</div>
+
+
+
+
+
+
+<!--========================
+ SIDEBAR
+=========================-->
+
+
+<nav 
+class="sidebar"
+id="sidebar">
+
+
+
+<div class="logo">
+
+پنل مدیریت
+
+</div>
+
+
+
+
+<ul>
+<li><a href="dashboard.html">🏠 داشبورد</a></li>
+<li><a href="manange moshtare.html">👤 مشتریان</a></li>
+<li><a href="orders.html">📦 سفارشات</a></li>
+<li><a href="contracts.html">📄 قراردادها</a></li>
+<li><a href="projects.html">مدیریت پروزه ها</a></li>
+<li><a href="customer-status.html">📞 وضعیت مشتریان</a></li>
+<li class="active"><a href="tasks.html">✅ مدیریت کارها</a></li>
+<li><a href="reports.html">📊 گزارشات</a></li>
+<li><a href=" calculator.html">🧮 ماشین حساب</a></li>
+<li><a href="#">⚙ تنظیمات</a></li>
+<li><a href="/login/index.html">🚪 خروج</a></li>
+</ul>
+
+
+</nav>
+
+
+
+
+
+
+
+<!--========================
+ MAIN CONTENT
+=========================-->
+
+
+
+<main class="content">
+
+
+
+
+
+<!-- داشبورد اصلی -->
+
+
+<section class="dashboard-welcome">
+
+
+
+<h1>
+
+🏠 داشبورد
+
+</h1>
+
+
+<p>
+
+به پنل مدیریت خوش آمدید.
+
+</p>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!--========================
+ BANK CARDS
+=========================-->
+
+
+
+<section class="bank-section">
+
+
+
+
+
+<div class="section-header">
+
+
+
+<h2>
+
+💳 کارت‌های بانکی
+
+</h2>
+
+
+
+
+
+<button
+
+class="add-card-btn"
+
+onclick="openBankCardForm()">
+
+
+
+➕ افزودن کارت
+
+
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<div
+
+class="bank-cards-container"
+
+id="bankCardsContainer">
+
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+<!--========================
+ ADD CARD MODAL
+=========================-->
+
+
+
+<div
+
+class="bank-modal"
+
+id="bankModal">
+
+
+
+
+
+<div
+
+class="bank-form-box">
+
+
+
+
+
+<div class="form-header">
+
+
+<h2>
+
+ساخت کارت بانکی
+
+</h2>
+
+
+
+<button
+
+onclick="closeBankCardForm()">
+
+✕
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="bank-form-grid">
+
+
+
+<div class="form-item">
+
+
+<label>
+
+بانک
+
+</label>
+
+
+
+<select id="bankName">
+
+
+<option value="pasargad">
+
+پاسارگاد
+
+</option>
+
+
+<option value="saderat">
+
+صادرات
+
+</option>
+
+
+<option value="mellat">
+
+ملت
+
+</option>
+
+
+<option value="sepah">
+
+سپه
+
+</option>
+
+
+<option value="sepino">
+
+سپینو
+
+</option>
+
+
+<option value="blu">
+
+بلو بانک
+
+</option>
+
+
+<option value="maskan">
+
+مسکن
+
+</option>
+
+
+<option value="other">
+
+سایر
+
+</option>
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+<div class="form-item">
+
+
+<label>
+
+شماره کارت
+
+</label>
+
+
+<input
+
+id="cardNumber"
+
+type="text"
+
+placeholder="6037-xxxx-xxxx-xxxx">
+
+
+</div>
+
+
+
+
+
+
+<div class="form-item">
+
+
+<label>
+
+نام مالک
+
+</label>
+
+
+<input
+
+id="cardOwner"
+
+type="text"
+
+placeholder="نام دارنده کارت">
+
+
+</div>
+
+
+
+
+
+
+<div class="form-item">
+
+
+<label>
+
+CVV2
+
+</label>
+
+
+<input
+
+id="cvv"
+
+type="text"
+
+placeholder="***">
+
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+
+<label>
+
+تاریخ انقضا
+
+</label>
+
+
+<input
+
+id="expireDate"
+
+type="text"
+
+placeholder="12/28">
+
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+
+<label>
+
+شماره شبا
+
+</label>
+
+
+<input
+
+id="iban"
+
+type="text"
+
+placeholder="IR...">
+
+
+</div>
+
+
+
+
+
+<div class="form-item">
+
+
+<label>
+
+موجودی اولیه
+
+</label>
+
+
+<input
+
+id="cardBalance"
+
+type="number"
+
+placeholder="مبلغ">
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<button
+
+class="save-bank-card"
+
+onclick="saveBankCard()">
+
+
+ساخت کارت
+
+
+</button>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<!--========================
+ CHANGE BALANCE MODAL
+=========================-->
+
+
+
+<div
+
+class="balance-modal"
+
+id="balanceModal">
+
+
+
+<div
+
+class="balance-form-box">
+
+
+
+<h2>
+
+💰 تغییر موجودی
+
+</h2>
+
+
+
+
+<label>
+
+نوع عملیات
+
+</label>
+
+
+
+<select id="balanceType">
+
+
+<option value="plus">
+
+➕ افزایش موجودی
+
+</option>
+
+
+<option value="minus">
+
+➖ کاهش موجودی
+
+</option>
+
+
+</select>
+
+
+
+
+
+<label>
+
+مبلغ
+
+</label>
+
+
+
+<input
+
+type="number"
+
+id="balanceAmount"
+
+placeholder="مثلاً 1000000">
+
+
+
+
+
+<label>
+
+توضیحات
+
+</label>
+
+
+
+<input
+
+type="text"
+
+id="balanceDescription"
+
+placeholder="دلیل تراکنش">
+
+
+
+
+
+<div class="balance-buttons">
+
+
+<button
+
+onclick="saveBalanceChange()">
+
+ثبت
+
+</button>
+
+
+
+<button
+
+onclick="closeBalanceModal()">
+
+انصراف
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!--========================
+ CARD HISTORY
+=========================-->
+
+
+
+<section
+
+class="card-history-section">
+
+
+
+
+
+<div class="section-header">
+
+
+<h2>
+
+📜 تاریخچه تراکنش کارت
+
+</h2>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="history-table-wrapper">
+
+
+
+<table class="bank-history-table">
+
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+
+نوع
+
+</th>
+
+
+
+<th>
+
+مبلغ
+
+</th>
+
+
+
+
+<th>
+
+توضیحات
+
+</th>
+
+
+
+
+<th>
+
+تاریخ
+
+</th>
+
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+<tbody
+
+id="cardHistoryTable">
+
+
+
+</tbody>
+
+
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+<!--========================
+ JAVASCRIPT
+=========================-->
+
+
+
+<script>
+
+
+function toggleMenu(){
+
+document
+.getElementById("sidebar")
+.classList.toggle("active");
+
+
+document
+.getElementById("overlay")
+.classList.toggle("active");
+
+
+}
+
+
+</script>
+
+
+
+
+
+<script src="dashboard.js"></script>
+
+<script>
+
+if("serviceWorker" in navigator){
+
+navigator.serviceWorker.register(
+"service-worker.js"
+);
+
+}
+
+</script>
+
+
+</body>
+
+
+</html>

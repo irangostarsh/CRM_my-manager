@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>مدیریت قراردادها</title>
+
+    <link rel="stylesheet" href="contracts.css">
+
+</head>
+
+<body>
+
+<button class="menu-btn" onclick="toggleMenu()">
+
+☰
+
+</button>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<!-- ================= Sidebar ================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+
+        CRM PANEL
+
+    </div>
+
+   <ul>
+<li><a href="/dashbord/dashboard.html">🏠 داشبورد</a></li>
+<li><a href="manange moshtare.html">👤 مشتریان</a></li>
+<li><a href="orders.html">📦 سفارشات</a></li>
+<li><a href="contracts.html">📄 قراردادها</a></li>
+<li><a href="projects.html">مدیریت پروزه ها</a></li>
+<li><a href="customer-status.html">📞 وضعیت مشتریان</a></li>
+<li><a href="reports.html">📊 گزارشات</a></li>
+<li><a href=" calculator.html">🧮 ماشین حساب</a></li>
+<li><a href="#">⚙ تنظیمات</a></li>
+<li><a href="#">🚪 خروج</a></li>
+</ul>
+</aside>
+
+<!-- ================= Content ================= -->
+
+<div class="content">
+
+<h1>
+
+📄 مدیریت قراردادها
+
+</h1>
+
+<!-- ================= Cards ================= -->
+
+<div class="cards">
+
+<div class="card">
+
+<h2 id="fileCount">
+
+0
+
+</h2>
+
+<p>
+
+تعداد فایل‌ها
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="pdfCount">
+
+0
+
+</h2>
+
+<p>
+
+فایل‌های PDF
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="imageCount">
+
+0
+
+</h2>
+
+<p>
+
+تصاویر
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="importantCount">
+
+0
+
+</h2>
+
+<p>
+
+فایل‌های مهم
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ================= Form ================= -->
+
+<div class="form-box">
+
+<h2>
+
+ثبت فایل جدید
+
+</h2>
+
+<form id="contractForm">
+
+<div class="grid">
+
+<div>
+
+<label>
+
+عنوان فایل
+
+</label>
+
+<input
+
+type="text"
+
+id="title"
+
+required>
+
+</div>
+
+<div>
+
+<label>
+
+دسته بندی
+
+</label>
+
+<select id="category">
+
+<option>
+
+قرارداد
+
+</option>
+
+<option>
+
+پروپوزال
+
+</option>
+
+<option>
+
+فاکتور
+
+</option>
+
+<option>
+
+الحاقیه
+
+</option>
+
+<option>
+
+سند
+
+</option>
+
+<option>
+
+سایر
+
+</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+انتخاب فایل
+
+</label>
+
+<input
+
+type="file"
+
+id="file"
+
+accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx">
+
+</div>
+
+<div>
+
+<label>
+
+فایل مهم
+
+</label>
+
+<br>
+
+<input
+
+type="checkbox"
+
+id="important">
+
+بله
+
+</div>
+
+<div style="grid-column:1/-1;">
+
+<label>
+
+توضیحات
+
+</label>
+
+<textarea
+
+id="description"
+
+rows="5"
+
+placeholder="توضیحات فایل..."></textarea>
+
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button
+
+type="submit"
+
+id="saveBtn">
+
+ذخیره فایل
+
+</button>
+
+<button
+
+type="reset">
+
+پاک کردن
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<!-- ==========================
+        Search
+=========================== -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="جستجو بر اساس عنوان یا دسته بندی...">
+
+</div>
+
+<!-- ==========================
+        Table
+=========================== -->
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ردیف</th>
+
+<th>عنوان فایل</th>
+
+<th>دسته بندی</th>
+
+<th>نوع فایل</th>
+
+<th>حجم فایل</th>
+
+<th>فایل مهم</th>
+
+<th>تاریخ ثبت</th>
+
+<th>عملیات</th>
+
+</tr>
+
+</thead>
+
+<tbody id="contractTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ==========================
+        Pagination
+=========================== -->
+
+<div id="pagination" class="pagination">
+
+</div>
+
+</div>
+
+<!-- ==========================
+        Modal
+=========================== -->
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+
+<div class="modal" id="detailsModal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>
+
+مشاهده فایل
+
+</h2>
+
+<button
+class="close-btn"
+onclick="closeModal()">
+
+✕
+
+</button>
+
+</div>
+
+<div
+class="modal-body"
+id="modalBody">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+        Sidebar Script
+=========================== -->
+
+<script>
+
+function toggleMenu(){
+
+document.getElementById("sidebar")
+
+.classList.toggle("active");
+
+document.getElementById("overlay")
+
+.classList.toggle("active");
+
+}
+
+</script>
+
+<!-- ==========================
+        Main Script
+=========================== -->
+
+<script src="contracts.js"></script>
+
+</body>
+
+</html>

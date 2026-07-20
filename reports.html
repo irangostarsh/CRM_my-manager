@@ -1,0 +1,697 @@
+<!-- reports.html بخش 1 -->
+
+<!DOCTYPE html>
+
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>گزارشات مالی</title>
+
+<link rel="stylesheet" href="reports.css">
+
+</head>
+
+
+<body>
+
+
+<!--=========================
+        MENU BUTTON
+==========================-->
+
+<button class="menu-btn" onclick="toggleMenu()">
+
+☰
+
+</button>
+
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+
+
+<!--=========================
+        SIDEBAR
+==========================-->
+
+<aside class="sidebar" id="sidebar">
+
+
+<div class="logo">
+
+CRM PANEL
+
+</div>
+
+
+<ul>
+<li><a href="/dashbord/dashboard.html">🏠 داشبورد</a></li>
+<li><a href="manange moshtare.html">👤 مشتریان</a></li>
+<li><a href="orders.html">📦 سفارشات</a></li>
+<li><a href="contracts.html">📄 قراردادها</a></li>
+<li><a href="projects.html">مدیریت پروزه ها</a></li>
+<li><a href="customer-status.html">📞 وضعیت مشتریان</a></li>
+<li class="active"><a href="tasks.html">✅ مدیریت کارها</a></li>
+<li><a href="reports.html">📊 گزارشات</a></li>
+<li><a href="calculator.html">🧮 ماشین حساب</a></li>
+<li><a href="#">⚙ تنظیمات</a></li>
+<li><a href="#">🚪 خروج</a></li>
+</ul>
+
+
+
+</aside>
+
+
+
+
+<!--=========================
+        CONTENT
+==========================-->
+
+
+<div class="content">
+
+
+<h1>
+
+📊 گزارشات مالی و آماری
+
+</h1>
+
+
+
+<!--=========================
+        STAT CARDS
+==========================-->
+
+
+<div class="cards">
+
+
+<div class="card income-card">
+
+<h2 id="totalIncome">
+
+0
+
+</h2>
+
+<p>
+
+💰 کل درآمد
+
+</p>
+
+</div>
+
+
+
+<div class="card expense-card">
+
+<h2 id="totalExpense">
+
+0
+
+</h2>
+
+<p>
+
+💸 کل هزینه
+
+</p>
+
+</div>
+
+
+
+<div class="card profit-card">
+
+<h2 id="totalProfit">
+
+0
+
+</h2>
+
+<p>
+
+📈 سود خالص
+
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2 id="transactionCount">
+
+0
+
+</h2>
+
+<p>
+
+🧾 تعداد تراکنش‌ها
+
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+<!--=========================
+        TRANSACTION FORM
+==========================-->
+
+<div class="form-box">
+
+
+<h2>
+
+➕ ثبت تراکنش جدید
+
+</h2>
+
+
+
+<form id="transactionForm">
+
+
+
+<div class="grid">
+
+
+
+<div>
+
+<label>
+
+نوع تراکنش
+
+</label>
+
+
+<select id="transactionType">
+
+
+<option value="income">
+
+درآمد 💰
+
+</option>
+
+
+<option value="expense">
+
+هزینه 💸
+
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+<div>
+
+<label>
+
+عنوان
+
+</label>
+
+
+<input
+
+type="text"
+
+id="transactionTitle"
+
+placeholder="مثلا طراحی سایت مشتری">
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+
+مبلغ
+
+</label>
+
+
+<input
+
+type="number"
+
+id="amount"
+
+placeholder="مبلغ به تومان">
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+
+تاریخ
+
+</label>
+
+
+<input
+
+type="date"
+
+id="transactionDate">
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+
+دسته‌بندی
+
+</label>
+
+
+
+<select id="category">
+
+
+<option>
+
+پروژه
+
+</option>
+
+
+<option>
+
+فروش
+
+</option>
+
+
+<option>
+
+تبلیغات
+
+</option>
+
+
+<option>
+
+حقوق
+
+</option>
+
+
+<option>
+
+سرور و هاست
+
+</option>
+
+
+<option>
+
+تجهیزات
+
+</option>
+
+
+<option>
+
+سایر
+
+</option>
+
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+<div style="grid-column:1/-1;">
+
+
+<label>
+
+توضیحات
+
+</label>
+
+
+<textarea
+
+id="transactionDescription"
+
+rows="4"
+
+placeholder="توضیحات تراکنش..."></textarea>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="buttons">
+
+
+<button
+
+type="submit"
+
+id="saveTransaction">
+
+
+ثبت تراکنش
+
+</button>
+
+
+
+
+<button
+
+type="reset">
+
+پاک کردن
+
+</button>
+
+
+
+</div>
+
+
+
+</form>
+
+
+</div>
+
+
+<!--=========================
+        SEARCH
+==========================-->
+
+<div class="toolbar">
+
+<div class="search-box">
+
+<input
+
+type="text"
+
+id="search"
+
+placeholder="جستجو در تراکنش‌ها...">
+
+</div>
+
+</div>
+
+
+
+<!--=========================
+        TRANSACTION TABLE
+==========================-->
+
+
+<div class="table-box">
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>ردیف</th>
+
+<th>نوع</th>
+
+<th>عنوان</th>
+
+<th>مبلغ</th>
+
+<th>دسته‌بندی</th>
+
+<th>تاریخ</th>
+
+<th>عملیات</th>
+
+</tr>
+
+</thead>
+
+
+
+<tbody id="transactionTable">
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+<!--=========================
+        PAGINATION
+==========================-->
+
+<div
+
+class="pagination"
+
+id="pagination">
+
+
+</div>
+
+
+
+
+
+<!--=========================
+        CHART SECTION
+==========================-->
+
+
+<div class="charts">
+
+
+<div class="chart-box">
+
+
+<h2>
+
+📊 درآمد و هزینه ماهانه
+
+</h2>
+
+
+<canvas id="incomeExpenseChart"></canvas>
+
+
+</div>
+
+
+
+
+
+<div class="chart-box">
+
+
+<h2>
+
+🥧 دسته‌بندی هزینه‌ها
+
+</h2>
+
+
+<canvas id="categoryChart"></canvas>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<!--=========================
+        MODAL
+==========================-->
+
+
+<div
+
+class="modal-overlay"
+
+id="modalOverlay">
+
+
+</div>
+
+
+
+
+<div
+
+class="modal"
+
+id="detailsModal">
+
+
+<div class="modal-header">
+
+
+<h2>
+
+جزئیات تراکنش
+
+</h2>
+
+
+
+<button
+
+class="close-btn"
+
+onclick="closeModal()">
+
+✕
+
+</button>
+
+
+</div>
+
+
+
+<div
+
+class="modal-body"
+
+id="modalBody">
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!--=========================
+        CHART JS
+==========================-->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+<!--=========================
+        MENU SCRIPT
+==========================-->
+
+<script>
+
+
+function toggleMenu(){
+
+
+document
+
+.getElementById("sidebar")
+
+.classList.toggle("active");
+
+
+
+document
+
+.getElementById("overlay")
+
+.classList.toggle("active");
+
+
+
+}
+
+
+</script>
+
+
+
+
+<!--=========================
+        MAIN JS
+==========================-->
+
+
+<script src="reports.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+</body>
+
+
+</html>

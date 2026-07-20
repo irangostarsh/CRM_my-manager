@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>مدیریت کارها</title>
+
+<link rel="stylesheet" href="tasks.css">
+
+</head>
+
+<body>
+
+<!--=========================
+        MENU BUTTON
+==========================-->
+
+<button class="menu-btn" onclick="toggleMenu()">
+
+☰
+
+</button>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<!--=========================
+        SIDEBAR
+==========================-->
+
+<aside class="sidebar" id="sidebar">
+
+<div class="logo">
+
+CRM PANEL
+
+</div>
+
+<ul>
+<li><a href="/dashbord/dashboard.html">🏠 داشبورد</a></li>
+<li><a href="manange moshtare.html">👤 مشتریان</a></li>
+<li><a href="orders.html">📦 سفارشات</a></li>
+<li><a href="contracts.html">📄 قراردادها</a></li>
+<li><a href="projects.html">مدیریت پروزه ها</a></li>
+<li><a href="customer-status.html">📞 وضعیت مشتریان</a></li>
+<li class="active"><a href="tasks.html">✅ مدیریت کارها</a></li>
+<li><a href="reports.html">📊 گزارشات</a></li>
+<li><a href=" calculator.html">🧮 ماشین حساب</a></li>
+<li><a href="#">⚙ تنظیمات</a></li>
+<li><a href="#">🚪 خروج</a></li>
+</ul>
+
+</aside>
+
+<!--=========================
+        CONTENT
+==========================-->
+
+<div class="content">
+
+<h1>
+
+✅ مدیریت کارها
+
+</h1>
+
+<!--=========================
+        CARDS
+==========================-->
+
+<div class="cards">
+
+<div class="card">
+
+<h2 id="allTasks">
+
+0
+
+</h2>
+
+<p>
+
+کل کارها
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="pendingTasks">
+
+0
+
+</h2>
+
+<p>
+
+در انتظار
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="doneTasks">
+
+0
+
+</h2>
+
+<p>
+
+انجام شده
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="urgentTasks">
+
+0
+
+</h2>
+
+<p>
+
+فوری
+
+</p>
+
+</div>
+
+</div>
+
+<!--=========================
+        FORM
+==========================-->
+
+<div class="form-box">
+
+<h2>
+
+ثبت کار جدید
+
+</h2>
+
+<form id="taskForm">
+
+<div class="grid">
+
+<div>
+
+<label>
+
+عنوان کار
+
+</label>
+
+<input
+
+type="text"
+
+id="taskTitle"
+
+required>
+
+</div>
+
+<div>
+
+<label>
+
+اولویت
+
+</label>
+
+<select id="priority">
+
+<option>کم</option>
+
+<option>متوسط</option>
+
+<option>زیاد</option>
+
+<option>فوری</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+تاریخ انجام
+
+</label>
+
+<input
+
+type="date"
+
+id="taskDate">
+
+</div>
+
+<div>
+
+<label>
+
+ساعت انجام
+
+</label>
+
+<input
+
+type="time"
+
+id="taskTime">
+
+</div>
+
+<div>
+
+<label>
+
+دسته‌بندی
+
+</label>
+
+<select id="category">
+
+<option>فروش</option>
+
+<option>مشتری</option>
+
+<option>پروژه</option>
+
+<option>مالی</option>
+
+<option>شخصی</option>
+
+<option>سایر</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+وضعیت
+
+</label>
+
+<select id="status">
+
+<option>در انتظار</option>
+
+<option>در حال انجام</option>
+
+<option>انجام شده</option>
+
+</select>
+
+</div>
+
+<div style="grid-column:1/-1;">
+
+<label>
+
+توضیحات
+
+</label>
+
+<textarea
+
+id="description"
+
+rows="5"
+
+placeholder="توضیحات کار..."></textarea>
+
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button
+
+type="submit"
+
+id="saveBtn">
+
+ثبت کار
+
+</button>
+
+<button
+
+type="reset">
+
+پاک کردن
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+
+<!--=========================
+        FILTERS
+==========================-->
+
+<div class="toolbar">
+
+<div class="search-box">
+
+<input
+type="text"
+id="search"
+placeholder="جستجو بر اساس عنوان، دسته‌بندی یا اولویت...">
+
+</div>
+
+<div class="filter-box">
+
+<select id="filterStatus">
+
+<option value="all">همه کارها</option>
+
+<option value="pending">در انتظار</option>
+
+<option value="progress">در حال انجام</option>
+
+<option value="done">انجام شده</option>
+
+<option value="urgent">فوری</option>
+
+<option value="late">معوق</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!--=========================
+        TASK TABLE
+==========================-->
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>✔</th>
+
+<th>ردیف</th>
+
+<th>عنوان کار</th>
+
+<th>دسته‌بندی</th>
+
+<th>اولویت</th>
+
+<th>تاریخ</th>
+
+<th>ساعت</th>
+
+<th>وضعیت</th>
+
+<th>عملیات</th>
+
+</tr>
+
+</thead>
+
+<tbody id="taskTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!--=========================
+        PAGINATION
+==========================-->
+
+<div
+class="pagination"
+id="pagination">
+
+</div>
+
+</div>
+
+<!--=========================
+        DETAILS MODAL
+==========================-->
+
+<div
+class="modal-overlay"
+id="modalOverlay"
+onclick="closeModal()">
+
+</div>
+
+<div
+class="modal"
+id="detailsModal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>
+
+جزئیات کار
+
+</h2>
+
+<button
+class="close-btn"
+onclick="closeModal()">
+
+✕
+
+</button>
+
+</div>
+
+<div
+class="modal-body"
+id="modalBody">
+
+</div>
+
+</div>
+
+</div>
+
+<!--=========================
+        TICK SOUND
+==========================-->
+
+<audio id="tickSound">
+
+<source src="tick.mp3" type="audio/mpeg">
+
+</audio>
+
+<!--=========================
+        Sidebar Script
+==========================-->
+
+<script>
+
+function toggleMenu(){
+
+document
+.getElementById("sidebar")
+.classList.toggle("active");
+
+document
+.getElementById("overlay")
+.classList.toggle("active");
+
+}
+
+</script>
+
+<!--=========================
+        Main JS
+==========================-->
+
+<script src="tasks.js"></script>
+
+</body>
+
+</html>

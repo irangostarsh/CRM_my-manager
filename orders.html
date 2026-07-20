@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>مدیریت سفارشات</title>
+
+<link rel="stylesheet" href="orders.css">
+
+</head>
+
+<body>
+
+<!-- =======================
+      Hamburger
+======================= -->
+
+<button class="menu-btn" onclick="toggleMenu()">
+
+☰
+
+</button>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<!-- =======================
+      Sidebar
+======================= -->
+
+<aside class="sidebar" id="sidebar">
+
+<div class="logo">
+
+CRM PANEL
+
+</div>
+
+<ul>
+<li><a href="/dashbord/dashboard.html">🏠 داشبورد</a></li>
+<li><a href="manange moshtare.html">👤 مشتریان</a></li>
+<li><a href="orders.html">📦 سفارشات</a></li>
+<li><a href="contracts.html">📄 قراردادها</a></li>
+<li><a href="projects.html">مدیریت پروزه ها</a></li>
+<li><a href="customer-status.html">📞 وضعیت مشتریان</a></li>
+<li class="active"><a href="tasks.html">✅ مدیریت کارها</a></li>
+<li><a href="reports.html">📊 گزارشات</a></li>
+<li><a href=" calculator.html">🧮 ماشین حساب</a></li>
+<li><a href="#">⚙ تنظیمات</a></li>
+<li><a href="#">🚪 خروج</a></li>
+</ul>
+
+</aside>
+
+<!-- =======================
+      Content
+======================= -->
+
+<div class="content">
+
+<h1>
+
+مدیریت سفارشات
+
+</h1>
+
+<!-- =======================
+      Dashboard Cards
+======================= -->
+
+<div class="cards">
+
+<div class="card">
+
+<h2 id="orderCount">0</h2>
+
+<p>
+
+تعداد سفارشات
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="totalPrice">0</h2>
+
+<p>
+
+مجموع قراردادها
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="paidPrice">0</h2>
+
+<p>
+
+کل دریافتی
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="remainPrice">0</h2>
+
+<p>
+
+مانده مطالبات
+
+</p>
+
+</div>
+
+</div>
+
+<!-- =======================
+      Order Form
+======================= -->
+
+<div class="form-box">
+
+<h2>
+
+ثبت سفارش جدید
+
+</h2>
+
+<form id="orderForm">
+
+<div class="grid">
+
+<div>
+
+<label>
+
+نام و نام خانوادگی
+
+</label>
+
+<input
+
+type="text"
+
+id="fullname"
+
+required>
+
+</div>
+
+<div>
+
+<label>
+
+شماره موبایل
+
+</label>
+
+<input
+
+type="tel"
+
+id="mobile"
+
+maxlength="11"
+
+required>
+
+</div>
+
+<div>
+
+<label>
+
+نام برند
+
+</label>
+
+<input
+
+type="text"
+
+id="brand">
+
+</div>
+
+<div>
+
+<label>
+
+نوع سفارش
+
+</label>
+
+<select id="type">
+
+<option>طراحی وب سایت</option>
+
+<option>وب اپلیکیشن</option>
+
+<option>اکوسیستم</option>
+
+<option>هوش مصنوعی</option>
+
+<option>اشتراک</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+زمان توسعه
+
+</label>
+
+<input
+
+type="text"
+
+id="time"
+
+placeholder="مثلاً 30 روز">
+
+</div>
+
+<div>
+
+<label>
+
+وضعیت سفارش
+
+</label>
+
+<select id="status">
+
+<option>در حال انجام</option>
+
+<option>تکمیل شده</option>
+
+<option>لغو شده</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+مبلغ اصلی
+
+</label>
+
+<input
+
+type="number"
+
+id="price"
+
+value="0">
+
+</div>
+
+<div>
+
+<label>
+
+تخفیف
+
+</label>
+
+<input
+
+type="number"
+
+id="discount"
+
+value="0">
+
+</div>
+
+<div>
+
+<label>
+
+مبلغ پرداخت شده
+
+</label>
+
+<input
+
+type="number"
+
+id="paid"
+
+value="0">
+
+</div>
+
+<div>
+
+<label>
+
+مبلغ باقیمانده
+
+</label>
+
+<input
+
+type="number"
+
+id="remain"
+
+readonly>
+
+</div>
+
+<div>
+
+<label>
+
+نوع پرداخت
+
+</label>
+
+<select id="paymentType">
+
+<option value="نقدی">
+
+نقدی
+
+</option>
+
+<option value="چک">
+
+چک
+
+</option>
+
+</select>
+
+</div>
+
+<div id="checkCountBox" style="display:none;">
+
+<label>
+
+تعداد فقره چک
+
+</label>
+
+<input
+
+type="number"
+
+id="checkCount"
+
+min="1"
+
+value="1">
+
+</div>
+
+<div>
+
+<label>
+
+آدرس مشتری
+
+</label>
+
+<textarea
+
+id="address"
+
+rows="3"></textarea>
+
+</div>
+
+</div>
+
+<!-- =======================
+      Dynamic Checks
+======================= -->
+
+<div id="checksContainer">
+
+</div>
+
+<div class="buttons">
+
+<button
+
+type="submit"
+
+id="saveBtn">
+
+ثبت سفارش
+
+</button>
+
+<button
+
+type="reset">
+
+پاک کردن
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+<!-- =======================
+      Search
+======================= -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="جستجو بر اساس نام، برند، موبایل یا نوع سفارش...">
+
+</div>
+
+<!-- =======================
+      Orders Table
+======================= -->
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ردیف</th>
+
+<th>نام مشتری</th>
+
+<th>نوع سفارش</th>
+
+<th>برند</th>
+
+<th>زمان توسعه</th>
+
+<th>مبلغ قرارداد</th>
+
+<th>تخفیف</th>
+
+<th>پرداختی</th>
+
+<th>باقیمانده</th>
+
+<th>نوع پرداخت</th>
+
+<th>وضعیت</th>
+
+<th>تاریخ ثبت</th>
+
+<th>عملیات</th>
+
+</tr>
+
+</thead>
+
+<tbody id="orderTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- =======================
+      Pagination
+======================= -->
+
+<div
+class="pagination"
+id="pagination">
+
+</div>
+
+</div>
+
+<!-- =======================
+      Details Modal
+======================= -->
+
+<div class="modal" id="detailsModal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>
+
+جزئیات سفارش
+
+</h2>
+
+<button
+class="close-btn"
+onclick="closeModal()">
+
+✕
+
+</button>
+
+</div>
+
+<div class="modal-body" id="modalBody">
+
+<!-- اطلاعات توسط JavaScript -->
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =======================
+      Overlay Modal
+======================= -->
+
+<div
+class="modal-overlay"
+id="modalOverlay"
+onclick="closeModal()">
+
+</div>
+
+<!-- =======================
+      Sidebar Script
+======================= -->
+
+<script>
+
+function toggleMenu(){
+
+document
+.getElementById("sidebar")
+.classList.toggle("active");
+
+document
+.getElementById("overlay")
+.classList.toggle("active");
+
+}
+
+</script>
+
+<!-- =======================
+      Orders Script
+======================= -->
+
+<script src="orders.js"></script>
+
+</body>
+
+</html>
