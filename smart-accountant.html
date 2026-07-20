@@ -365,13 +365,918 @@ id="suggestionList">
 
 </section>
 
+<!--====================================
+        CHARTS
+=====================================-->
 
+<section class="charts-section">
+
+<div class="chart-card">
+
+<h2>
+
+📈 نمودار درآمد
+
+</h2>
+
+<canvas id="incomeChart"></canvas>
+
+</div>
+
+<div class="chart-card">
+
+<h2>
+
+📊 نمودار سود
+
+</h2>
+
+<canvas id="profitChart"></canvas>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        TOP CUSTOMERS
+=====================================-->
+
+<section class="top-customers">
+
+<div class="box-header">
+
+<h2>
+
+🏆 مشتریان برتر
+
+</h2>
+
+</div>
+
+<table class="smart-table">
+
+<thead>
+
+<tr>
+
+<th>
+
+رتبه
+
+</th>
+
+<th>
+
+نام مشتری
+
+</th>
+
+<th>
+
+تعداد خرید
+
+</th>
+
+<th>
+
+مبلغ خرید
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="topCustomers">
+
+<tr>
+
+<td>1</td>
+
+<td>-</td>
+
+<td>0</td>
+
+<td>0 تومان</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+
+
+
+
+<!--====================================
+        TOP PRODUCTS
+=====================================-->
+
+<section class="top-products">
+
+<div class="box-header">
+
+<h2>
+
+📦 کالاهای پرفروش
+
+</h2>
+
+</div>
+
+<table class="smart-table">
+
+<thead>
+
+<tr>
+
+<th>
+
+رتبه
+
+</th>
+
+<th>
+
+نام کالا
+
+</th>
+
+<th>
+
+فروش
+
+</th>
+
+<th>
+
+درآمد
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="topProducts">
+
+<tr>
+
+<td>1</td>
+
+<td>-</td>
+
+<td>0</td>
+
+<td>0 تومان</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</section>
+
+
+
+
+
+<!--====================================
+        FINANCIAL STATUS
+=====================================-->
+
+<section class="financial-status">
+
+<div class="status-card">
+
+<h3>
+
+💳 موجودی صندوق
+
+</h3>
+
+<h2 id="cashBox">
+
+0 تومان
+
+</h2>
+
+</div>
+
+<div class="status-card">
+
+<h3>
+
+🏦 موجودی بانک
+
+</h3>
+
+<h2 id="bankBalance">
+
+0 تومان
+
+</h2>
+
+</div>
+
+<div class="status-card">
+
+<h3>
+
+📥 دریافتنی‌ها
+
+</h3>
+
+<h2 id="receivable">
+
+0 تومان
+
+</h2>
+
+</div>
+
+<div class="status-card">
+
+<h3>
+
+📤 پرداختنی‌ها
+
+</h3>
+
+<h2 id="payable">
+
+0 تومان
+
+</h2>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        SALES COMPARISON
+=====================================-->
+
+<section class="compare-box">
+
+<div class="box-header">
+
+<h2>
+
+📅 مقایسه فروش
+
+</h2>
+
+</div>
+
+<div class="compare-grid">
+
+<div>
+
+<span>
+
+ماه قبل
+
+</span>
+
+<h2 id="lastMonthSale">
+
+0 تومان
+
+</h2>
+
+</div>
+
+<div>
+
+<span>
+
+این ماه
+
+</span>
+
+<h2 id="thisMonthSale">
+
+0 تومان
+
+</h2>
+
+</div>
+
+<div>
+
+<span>
+
+درصد رشد
+
+</span>
+
+<h2 id="growthPercent">
+
+0%
+
+</h2>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!--====================================
+        AI CHAT
+=====================================-->
+
+<section class="ai-chat-section">
+
+<div class="box-header">
+
+<h2>
+
+🤖 گفت‌وگو با مدیر مالی هوشمند
+
+</h2>
+
+</div>
+
+<div class="chat-box" id="chatBox">
+
+<div class="ai-message">
+
+سلام 👋
+
+من مدیر مالی هوشمند هستم.
+
+هر سوالی درباره فروش، درآمد، سود، مشتری‌ها یا فاکتورها داشته باشید از من بپرسید.
+
+</div>
+
+</div>
+
+<div class="chat-input">
+
+<input
+
+type="text"
+
+id="aiQuestion"
+
+placeholder="مثلاً: سود این ماه چقدر بوده؟">
+
+<button id="sendQuestion">
+
+ارسال
+
+</button>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        FINANCIAL HEALTH
+=====================================-->
+
+<section class="health-section">
+
+<div class="box-header">
+
+<h2>
+
+❤️ سلامت مالی کسب و کار
+
+</h2>
+
+</div>
+
+<div class="health-card">
+
+<div class="health-circle">
+
+<span id="healthScore">
+
+100
+
+</span>
+
+%
+
+</div>
+
+<div class="health-info">
+
+<h3>
+
+وضعیت مالی
+
+</h3>
+
+<p id="healthText">
+
+عالی ✅
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        NEXT MONTH PREDICTION
+=====================================-->
+
+<section class="prediction-section">
+
+<div class="box-header">
+
+<h2>
+
+🔮 پیش‌بینی ماه آینده
+
+</h2>
+
+</div>
+
+<div class="prediction-grid">
+
+<div>
+
+<h3>
+
+درآمد پیش‌بینی شده
+
+</h3>
+
+<h2 id="predictIncome">
+
+0 تومان
+
+</h2>
+
+</div>
+
+<div>
+
+<h3>
+
+سود پیش‌بینی شده
+
+</h3>
+
+<h2 id="predictProfit">
+
+0 تومان
+
+</h2>
+
+</div>
+
+<div>
+
+<h3>
+
+رشد احتمالی
+
+</h3>
+
+<h2 id="predictGrowth">
+
+0%
+
+</h2>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        SMART TASKS
+=====================================-->
+
+<section class="tasks-section">
+
+<div class="box-header">
+
+<h2>
+
+📋 کارهای پیشنهادی
+
+</h2>
+
+</div>
+
+<div id="smartTasks">
+
+<div class="task-item">
+
+✅ هیچ کاری برای امروز وجود ندارد.
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        SMART NOTIFICATIONS
+=====================================-->
+
+<section class="notification-section">
+
+<div class="box-header">
+
+<h2>
+
+🚨 اعلان‌های مهم
+
+</h2>
+
+</div>
+
+<div id="smartNotifications">
+
+<div class="notification-item">
+
+اطلاعیه‌ای وجود ندارد.
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        BEST DAY
+=====================================-->
+
+<section class="best-day-section">
+
+<div class="box-header">
+
+<h2>
+
+🏆 بهترین روز فروش
+
+</h2>
+
+</div>
+
+<div class="best-day-card">
+
+<h1 id="bestSaleDay">
+
+-
+
+</h1>
+
+<p>
+
+بیشترین درآمد ثبت شده
+
+</p>
+
+<h2 id="bestSalePrice">
+
+0 تومان
+
+</h2>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        SMART AI STATUS
+=====================================-->
+
+<section class="ai-status">
+
+<div class="status-item">
+
+<h3>
+
+🟢 وضعیت سیستم
+
+</h3>
+
+<p>
+
+فعال
+
+</p>
+
+</div>
+
+<div class="status-item">
+
+<h3>
+
+🧠 آخرین تحلیل
+
+</h3>
+
+<p id="lastAnalyze">
+
+همین الان
+
+</p>
+
+</div>
+
+<div class="status-item">
+
+<h3>
+
+📊 داده‌های بررسی شده
+
+</h3>
+
+<p id="checkedData">
+
+0
+
+</p>
+
+</div>
+
+        </section>
+
+        <!--====================================
+        FINANCIAL CALENDAR
+=====================================-->
+
+<section class="calendar-section">
+
+<div class="box-header">
+
+<h2>
+
+📅 تقویم مالی
+
+</h2>
+
+</div>
+
+<div class="calendar-grid">
+
+<div class="calendar-card">
+
+<h3>
+
+امروز
+
+</h3>
+
+<p id="todayEvents">
+
+هیچ رویدادی ثبت نشده
+
+</p>
+
+</div>
+
+<div class="calendar-card">
+
+<h3>
+
+سررسید پرداخت
+
+</h3>
+
+<p id="paymentDeadline">
+
+ندارد
+
+</p>
+
+</div>
+
+<div class="calendar-card">
+
+<h3>
+
+چک‌های دریافتی
+
+</h3>
+
+<p id="receivedCheques">
+
+۰
+
+</p>
+
+</div>
+
+<div class="calendar-card">
+
+<h3>
+
+چک‌های پرداختی
+
+</h3>
+
+<p id="paymentCheques">
+
+۰
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        FINANCIAL GOALS
+=====================================-->
+
+<section class="goal-section">
+
+<div class="box-header">
+
+<h2>
+
+🎯 اهداف مالی
+
+</h2>
+
+</div>
+
+<div class="goal-card">
+
+<h3>
+
+هدف فروش ماه
+
+</h3>
+
+<progress
+
+id="goalProgress"
+
+value="0"
+
+max="100">
+
+</progress>
+
+<p id="goalText">
+
+۰٪ تکمیل شده
+
+</p>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        AI REPORT
+=====================================-->
+
+<section class="report-section">
+
+<div class="box-header">
+
+<h2>
+
+📄 گزارش نهایی هوش مصنوعی
+
+</h2>
+
+</div>
+
+<div id="finalReport">
+
+<p>
+
+هنوز گزارشی تولید نشده است.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+
+
+<!--====================================
+        QUICK ACTIONS
+=====================================-->
+
+<section class="quick-actions">
+
+<button id="refreshAnalysis">
+
+🔄 تحلیل مجدد
+
+</button>
+
+<button id="downloadReport">
+
+📄 دانلود گزارش
+
+</button>
+
+<button id="printReport">
+
+🖨 چاپ گزارش
+
+</button>
+
+<button id="shareReport">
+
+📤 اشتراک گذاری
+
+</button>
+
+</section>
+
+
+
+
+
+<!--====================================
+        FOOTER
+=====================================-->
+
+<footer class="smart-footer">
+
+<p>
+
+© 2026 CRM Smart Accountant
+
+تمامی اطلاعات به صورت محلی روی دستگاه ذخیره می‌شود.
+
+</p>
+
+        </footer>
+        
+
+
+<!--====================================
+        CHART.JS
+=====================================-->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 
 
 <script src="smart-accountant.js"></script>
-<script src="js/language.js"></script>
+
 </body>
 
-</html>
+        </html>
