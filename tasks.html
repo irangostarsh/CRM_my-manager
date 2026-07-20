@@ -40,7 +40,7 @@ CRM PANEL
 </div>
 
 <ul>
-<li><a href="/dashbord/dashboard.html">🏠 داشبورد</a></li>
+<li><a href="dashboard.html">🏠 داشبورد</a></li>
 <li><a href="manange moshtare.html">👤 مشتریان</a></li>
 <li><a href="orders.html">📦 سفارشات</a></li>
 <li><a href="contracts.html">📄 قراردادها</a></li>
@@ -48,9 +48,11 @@ CRM PANEL
 <li><a href="customer-status.html">📞 وضعیت مشتریان</a></li>
 <li class="active"><a href="tasks.html">✅ مدیریت کارها</a></li>
 <li><a href="reports.html">📊 گزارشات</a></li>
+<li><a href="invoice.html">📜فاکتور هوشمند</a></li>
+<li><a href="smart-accountant.html">🖐تحلیلگر هوشمند</a></li>
 <li><a href=" calculator.html">🧮 ماشین حساب</a></li>
-<li><a href="#">⚙ تنظیمات</a></li>
-<li><a href="#">🚪 خروج</a></li>
+<li><a href="stting.html">⚙ تنظیمات</a></li>
+<li><a href="index.html">🚪 خروج</a></li>
 </ul>
 
 </aside>
@@ -491,6 +493,27 @@ document
 ==========================-->
 
 <script src="tasks.js"></script>
+<script>
+
+window.addEventListener("load", function(){
+
+    const theme = localStorage.getItem("theme");
+
+    if(theme === "dark"){
+
+        document.body.classList.add("dark");
+
+    }else{
+
+        document.body.classList.remove("dark");
+
+    }
+
+});
+
+</script>
+
+
 
 </body>
 
