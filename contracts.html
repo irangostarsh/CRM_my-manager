@@ -33,18 +33,23 @@
 
     </div>
 
-   <ul>
-<li><a href="/dashbord/dashboard.html">🏠 داشبورد</a></li>
+ <ul>
+<li><a href="dashboard.html">🏠 داشبورد</a></li>
 <li><a href="manange moshtare.html">👤 مشتریان</a></li>
 <li><a href="orders.html">📦 سفارشات</a></li>
 <li><a href="contracts.html">📄 قراردادها</a></li>
 <li><a href="projects.html">مدیریت پروزه ها</a></li>
 <li><a href="customer-status.html">📞 وضعیت مشتریان</a></li>
+<li class="active"><a href="tasks.html">✅ مدیریت کارها</a></li>
 <li><a href="reports.html">📊 گزارشات</a></li>
+<li><a href="invoice.html">📜فاکتور هوشمند</a></li>
+<li><a href="smart-accountant.html">🖐تحلیلگر هوشمند</a></li>
 <li><a href=" calculator.html">🧮 ماشین حساب</a></li>
-<li><a href="#">⚙ تنظیمات</a></li>
-<li><a href="#">🚪 خروج</a></li>
+<li><a href="stting.html">⚙ تنظیمات</a></li>
+<li><a href="index.html">🚪 خروج</a></li>
 </ul>
+
+
 </aside>
 
 <!-- ================= Content ================= -->
@@ -419,6 +424,19 @@ document.getElementById("overlay")
 =========================== -->
 
 <script src="contracts.js"></script>
+
+
+<script>
+    window.onload = function(){
+
+    if(localStorage.getItem("theme")=="dark"){
+
+        document.body.classList.add("dark");
+
+    }
+
+}
+</script>
 
 </body>
 
