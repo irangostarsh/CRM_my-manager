@@ -1076,3 +1076,79 @@ tbody tr:hover{
 
 
 }
+
+/*====================================
+        DARK MODE
+=====================================*/
+
+body.dark{
+
+    background:#0f172a;
+
+    color:#fff;
+
+}
+
+body.dark .sidebar{
+
+    background:#0f172a;
+
+}
+
+body.dark .logo{
+
+    background:#020617;
+
+}
+
+body.dark .content{
+
+    background:#111827;
+
+}
+
+body.dark .card,
+
+body.dark .form-box,
+
+body.dark .table-box,
+
+body.dark .bank-section,
+
+body.dark .notes-section{
+
+    background:#1e293b;
+
+    color:#fff;
+
+}
+
+body.dark input,
+body.dark textarea,
+body.dark select{
+
+    background:#334155;
+
+    color:#fff;
+
+    border:1px solid #475569;
+
+}
+
+body.dark table{
+
+    color:#fff;
+
+}
+
+body.dark tbody tr{
+
+    background:#1e293b;
+
+}
+
+body.dark tbody tr:hover{
+
+    background:#334155;
+
+}
