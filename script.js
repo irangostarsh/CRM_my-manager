@@ -1,15 +1,13 @@
 "use strict";
 
-
 /* =========================================================
    MY MANAGER AUTH SYSTEM
-   Version 3.0.0
+   Version 3.1.0
+   Cread24 / WebView Navigation Fix
 ========================================================= */
-
 
 const STORAGE_KEY = "my_manager_users";
 const SESSION_KEY = "my_manager_current_user";
-
 
 /* =========================================================
    HELPERS
@@ -19,13 +17,9 @@ const $ = (selector) => {
     return document.querySelector(selector);
 };
 
-
 function getUsers() {
-
     try {
-
-        const data =
-            localStorage.getItem(STORAGE_KEY);
+        const data = localStorage.getItem(STORAGE_KEY);
 
         if (!data) {
             return [];
@@ -33,24 +27,17 @@ function getUsers() {
 
         const users = JSON.parse(data);
 
-        return Array.isArray(users)
-            ? users
-            : [];
+        return Array.isArray(users) ? users : [];
 
     } catch (error) {
 
-        console.error(
-            "خطا در خواندن کاربران:",
-            error
-        );
+        console.error("خطا در خواندن کاربران:", error);
 
         return [];
     }
 }
 
-
 function saveUsers(users) {
-
     try {
 
         localStorage.setItem(
@@ -71,7 +58,6 @@ function saveUsers(users) {
     }
 }
 
-
 function getCurrentUser() {
 
     try {
@@ -87,19 +73,32 @@ function getCurrentUser() {
 
     } catch (error) {
 
+        console.error(
+            "خطا در خواندن نشست:",
+            error
+        );
+
         return null;
     }
 }
 
-
 function setCurrentUser(user) {
 
-    sessionStorage.setItem(
-        SESSION_KEY,
-        JSON.stringify(user)
-    );
-}
+    try {
 
+        sessionStorage.setItem(
+            SESSION_KEY,
+            JSON.stringify(user)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "خطا در ذخیره نشست:",
+            error
+        );
+    }
+}
 
 function removeCurrentUser() {
 
@@ -108,6 +107,59 @@ function removeCurrentUser() {
     );
 }
 
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function goToDashboard() {
+
+    /*
+       برای سایت‌هایی که داخل WebView / Cread24
+       به صورت لینک اجرا می‌شوند، مسیر نسبی بهتر است.
+
+       ./dashboard.html
+       یعنی dashboard.html در همان مسیر صفحه فعلی.
+    */
+
+    const dashboardPath = "./dashboard.html";
+
+    console.log(
+        "Current URL:",
+        window.location.href
+    );
+
+    console.log(
+        "Dashboard URL:",
+        new URL(
+            dashboardPath,
+            document.baseURI
+        ).href
+    );
+
+    try {
+
+        window.location.assign(
+            new URL(
+                dashboardPath,
+                document.baseURI
+            ).href
+        );
+
+    } catch (error) {
+
+        console.error(
+            "خطا در انتقال به داشبورد:",
+            error
+        );
+
+        /*
+           fallback
+        */
+
+        window.location.href =
+            dashboardPath;
+    }
+}
 
 /* =========================================================
    MESSAGE
@@ -118,8 +170,7 @@ function showMessage(
     type = "error"
 ) {
 
-    const message =
-        $("#message");
+    const message = $("#message");
 
     if (!message) {
         return;
@@ -129,14 +180,11 @@ function showMessage(
 
     message.className =
         `message show ${type}`;
-
 }
-
 
 function hideMessage() {
 
-    const message =
-        $("#message");
+    const message = $("#message");
 
     if (!message) {
         return;
@@ -147,7 +195,6 @@ function hideMessage() {
     message.className =
         "message";
 }
-
 
 /* =========================================================
    USERNAME VALIDATION
@@ -163,32 +210,26 @@ function validateUsername(username) {
         };
     }
 
-
     if (username.length < 3) {
 
         return {
             valid: false,
-            message: "نام کاربری باید حداقل ۳ کاراکتر باشد."
+            message:
+                "نام کاربری باید حداقل ۳ کاراکتر باشد."
         };
     }
-
 
     if (username.length > 30) {
 
         return {
             valid: false,
-            message: "نام کاربری نباید بیشتر از ۳۰ کاراکتر باشد."
+            message:
+                "نام کاربری نباید بیشتر از ۳۰ کاراکتر باشد."
         };
     }
 
-
-    /*
-       حروف فارسی، انگلیسی، عدد و _
-    */
-
     const usernameRegex =
         /^[\u0600-\u06FFa-zA-Z0-9_]+$/;
-
 
     if (!usernameRegex.test(username)) {
 
@@ -199,12 +240,10 @@ function validateUsername(username) {
         };
     }
 
-
     return {
         valid: true
     };
 }
-
 
 /* =========================================================
    PASSWORD VALIDATION
@@ -216,10 +255,10 @@ function validatePassword(password) {
 
         return {
             valid: false,
-            message: "رمز عبور را وارد کنید."
+            message:
+                "رمز عبور را وارد کنید."
         };
     }
-
 
     if (password.length < 6) {
 
@@ -230,12 +269,10 @@ function validatePassword(password) {
         };
     }
 
-
     return {
         valid: true
     };
 }
-
 
 /* =========================================================
    PASSWORD STRENGTH
@@ -253,7 +290,6 @@ function updatePasswordStrength(password) {
         return;
     }
 
-
     if (!password) {
 
         progress.style.width = "0%";
@@ -261,12 +297,12 @@ function updatePasswordStrength(password) {
         text.textContent =
             "قدرت رمز عبور";
 
+        text.style.color = "";
+
         return;
     }
 
-
     let score = 0;
-
 
     if (password.length >= 6) {
         score++;
@@ -292,11 +328,12 @@ function updatePasswordStrength(password) {
         score++;
     }
 
-
     if (score <= 2) {
 
         progress.style.width = "35%";
-        progress.style.background = "#ef4444";
+
+        progress.style.background =
+            "#ef4444";
 
         text.textContent =
             "ضعیف";
@@ -307,7 +344,9 @@ function updatePasswordStrength(password) {
     } else if (score <= 4) {
 
         progress.style.width = "65%";
-        progress.style.background = "#f59e0b";
+
+        progress.style.background =
+            "#f59e0b";
 
         text.textContent =
             "متوسط";
@@ -318,7 +357,9 @@ function updatePasswordStrength(password) {
     } else {
 
         progress.style.width = "100%";
-        progress.style.background = "#16a34a";
+
+        progress.style.background =
+            "#16a34a";
 
         text.textContent =
             "قوی";
@@ -327,7 +368,6 @@ function updatePasswordStrength(password) {
             "#16a34a";
     }
 }
-
 
 /* =========================================================
    LOGIN
@@ -338,22 +378,18 @@ function loginUser(
     password
 ) {
 
-    const users =
-        getUsers();
-
+    const users = getUsers();
 
     const normalizedUsername =
         username.trim().toLowerCase();
 
-
     const user =
         users.find(
-            item =>
+            (item) =>
                 item.username.toLowerCase() ===
                     normalizedUsername &&
                 item.password === password
         );
-
 
     if (!user) {
 
@@ -364,7 +400,6 @@ function loginUser(
         };
     }
 
-
     setCurrentUser({
 
         id: user.id,
@@ -373,16 +408,13 @@ function loginUser(
 
         loginAt:
             new Date().toISOString()
-
     });
-
 
     return {
         success: true,
         user
     };
 }
-
 
 /* =========================================================
    REGISTER
@@ -396,19 +428,17 @@ function registerUser(
     const validation =
         validateUsername(username);
 
-
     if (!validation.valid) {
 
         return {
             success: false,
-            message: validation.message
+            message:
+                validation.message
         };
     }
 
-
     const passwordValidation =
         validatePassword(password);
-
 
     if (!passwordValidation.valid) {
 
@@ -419,22 +449,18 @@ function registerUser(
         };
     }
 
-
     const users =
         getUsers();
-
 
     const normalizedUsername =
         username.trim().toLowerCase();
 
-
     const alreadyExists =
         users.some(
-            user =>
+            (user) =>
                 user.username.toLowerCase() ===
                 normalizedUsername
         );
-
 
     if (alreadyExists) {
 
@@ -445,12 +471,14 @@ function registerUser(
         };
     }
 
-
     const newUser = {
 
         id:
-            crypto.randomUUID
+            typeof crypto !== "undefined" &&
+            typeof crypto.randomUUID === "function"
+
                 ? crypto.randomUUID()
+
                 : Date.now().toString(),
 
         username:
@@ -461,16 +489,12 @@ function registerUser(
 
         createdAt:
             new Date().toISOString()
-
     };
-
 
     users.push(newUser);
 
-
     const saved =
         saveUsers(users);
-
 
     if (!saved) {
 
@@ -481,13 +505,11 @@ function registerUser(
         };
     }
 
-
     return {
         success: true,
         user: newUser
     };
 }
-
 
 /* =========================================================
    SWITCH LOGIN / REGISTER
@@ -495,15 +517,12 @@ function registerUser(
 
 let isRegisterMode = false;
 
-
 function switchMode() {
 
     isRegisterMode =
         !isRegisterMode;
 
-
     hideMessage();
-
 
     const loginForm =
         $("#loginForm");
@@ -526,33 +545,44 @@ function switchMode() {
     const headerIcon =
         $("#headerIcon");
 
+    if (!loginForm || !registerForm) {
+        return;
+    }
 
     if (isRegisterMode) {
 
-        loginForm.classList.add("hidden");
+        loginForm.classList.add(
+            "hidden"
+        );
 
-        registerForm.classList.remove("hidden");
+        registerForm.classList.remove(
+            "hidden"
+        );
 
+        if (formTitle) {
+            formTitle.textContent =
+                "ساخت حساب کاربری";
+        }
 
-        formTitle.textContent =
-            "ساخت حساب کاربری";
+        if (formSubtitle) {
+            formSubtitle.textContent =
+                "اطلاعات حساب خود را انتخاب کنید";
+        }
 
+        if (switchText) {
+            switchText.textContent =
+                "قبلاً حساب ساخته‌اید؟";
+        }
 
-        formSubtitle.textContent =
-            "اطلاعات حساب خود را انتخاب کنید";
+        if (switchButton) {
+            switchButton.textContent =
+                "وارد شوید";
+        }
 
-
-        switchText.textContent =
-            "قبلاً حساب ساخته‌اید؟";
-
-
-        switchButton.textContent =
-            "وارد شوید";
-
-
-        headerIcon.textContent =
-            "✨";
-
+        if (headerIcon) {
+            headerIcon.textContent =
+                "✨";
+        }
 
         setTimeout(() => {
 
@@ -562,30 +592,38 @@ function switchMode() {
 
     } else {
 
-        registerForm.classList.add("hidden");
+        registerForm.classList.add(
+            "hidden"
+        );
 
-        loginForm.classList.remove("hidden");
+        loginForm.classList.remove(
+            "hidden"
+        );
 
+        if (formTitle) {
+            formTitle.textContent =
+                "خوش آمدید";
+        }
 
-        formTitle.textContent =
-            "خوش آمدید";
+        if (formSubtitle) {
+            formSubtitle.textContent =
+                "برای ورود به حساب خود اطلاعاتتان را وارد کنید";
+        }
 
+        if (switchText) {
+            switchText.textContent =
+                "حساب کاربری ندارید؟";
+        }
 
-        formSubtitle.textContent =
-            "برای ورود به حساب خود اطلاعاتتان را وارد کنید";
+        if (switchButton) {
+            switchButton.textContent =
+                "ثبت‌نام کنید";
+        }
 
-
-        switchText.textContent =
-            "حساب کاربری ندارید؟";
-
-
-        switchButton.textContent =
-            "ثبت‌نام کنید";
-
-
-        headerIcon.textContent =
-            "🔐";
-
+        if (headerIcon) {
+            headerIcon.textContent =
+                "🔐";
+        }
 
         setTimeout(() => {
 
@@ -594,7 +632,6 @@ function switchMode() {
         }, 100);
     }
 }
-
 
 /* =========================================================
    PASSWORD SHOW / HIDE
@@ -606,7 +643,7 @@ function setupPasswordToggles() {
         .querySelectorAll(
             ".password-toggle"
         )
-        .forEach(button => {
+        .forEach((button) => {
 
             button.addEventListener(
                 "click",
@@ -623,7 +660,6 @@ function setupPasswordToggles() {
                     if (!input) {
                         return;
                     }
-
 
                     if (
                         input.type ===
@@ -644,12 +680,10 @@ function setupPasswordToggles() {
                         button.textContent =
                             "👁";
                     }
-
                 }
             );
         });
 }
-
 
 /* =========================================================
    LOGIN FORM
@@ -660,31 +694,35 @@ function setupLogin() {
     const form =
         $("#loginForm");
 
-
     if (!form) {
         return;
     }
 
-
     form.addEventListener(
         "submit",
-        event => {
+        (event) => {
 
             event.preventDefault();
 
             hideMessage();
 
+            const usernameInput =
+                $("#loginUsername");
+
+            const passwordInput =
+                $("#loginPassword");
+
+            if (!usernameInput ||
+                !passwordInput) {
+
+                return;
+            }
 
             const username =
-                $("#loginUsername")
-                    .value
-                    .trim();
-
+                usernameInput.value.trim();
 
             const password =
-                $("#loginPassword")
-                    .value;
-
+                passwordInput.value;
 
             if (!username) {
 
@@ -692,12 +730,10 @@ function setupLogin() {
                     "نام کاربری را وارد کنید."
                 );
 
-                $("#loginUsername")
-                    .focus();
+                usernameInput.focus();
 
                 return;
             }
-
 
             if (!password) {
 
@@ -705,23 +741,22 @@ function setupLogin() {
                     "رمز عبور را وارد کنید."
                 );
 
-                $("#loginPassword")
-                    .focus();
+                passwordInput.focus();
 
                 return;
             }
-
 
             const button =
                 form.querySelector(
                     ".submit-button"
                 );
 
+            if (button) {
 
-            button.classList.add(
-                "loading"
-            );
-
+                button.classList.add(
+                    "loading"
+                );
+            }
 
             setTimeout(() => {
 
@@ -731,11 +766,12 @@ function setupLogin() {
                         password
                     );
 
+                if (button) {
 
-                button.classList.remove(
-                    "loading"
-                );
-
+                    button.classList.remove(
+                        "loading"
+                    );
+                }
 
                 if (!result.success) {
 
@@ -744,51 +780,46 @@ function setupLogin() {
                         "error"
                     );
 
+                    const card =
+                        $(".auth-card");
 
-                    $(".auth-card")
-                        .classList.add(
+                    if (card) {
+
+                        card.classList.add(
                             "shake"
                         );
 
+                        setTimeout(() => {
 
-                    setTimeout(() => {
-
-                        $(".auth-card")
-                            .classList.remove(
+                            card.classList.remove(
                                 "shake"
                             );
 
-                    }, 400);
-
+                        }, 400);
+                    }
 
                     return;
                 }
-
 
                 showMessage(
                     `خوش آمدید ${result.user.username} 🌟`,
                     "success"
                 );
 
-
                 /*
-                    اگر صفحه اصلی پروژه شما مثلاً
-                    dashboard.html است، اینجا تغییر بده.
+                    انتقال اصلاح‌شده برای WebView/Cread24
                 */
 
                 setTimeout(() => {
 
-                    window.location.href =
-                        "dashboard.html";
+                    goToDashboard();
 
                 }, 700);
 
             }, 350);
-
         }
     );
 }
-
 
 /* =========================================================
    REGISTER FORM
@@ -799,40 +830,46 @@ function setupRegister() {
     const form =
         $("#registerForm");
 
-
     if (!form) {
         return;
     }
 
-
     form.addEventListener(
         "submit",
-        event => {
+        (event) => {
 
             event.preventDefault();
 
             hideMessage();
 
+            const usernameInput =
+                $("#registerUsername");
+
+            const passwordInput =
+                $("#registerPassword");
+
+            const confirmInput =
+                $("#registerPasswordConfirm");
+
+            if (
+                !usernameInput ||
+                !passwordInput ||
+                !confirmInput
+            ) {
+                return;
+            }
 
             const username =
-                $("#registerUsername")
-                    .value
-                    .trim();
-
+                usernameInput.value.trim();
 
             const password =
-                $("#registerPassword")
-                    .value;
-
+                passwordInput.value;
 
             const confirmPassword =
-                $("#registerPasswordConfirm")
-                    .value;
-
+                confirmInput.value;
 
             const usernameValidation =
                 validateUsername(username);
-
 
             if (!usernameValidation.valid) {
 
@@ -840,16 +877,13 @@ function setupRegister() {
                     usernameValidation.message
                 );
 
-                $("#registerUsername")
-                    .focus();
+                usernameInput.focus();
 
                 return;
             }
 
-
             const passwordValidation =
                 validatePassword(password);
-
 
             if (!passwordValidation.valid) {
 
@@ -857,12 +891,10 @@ function setupRegister() {
                     passwordValidation.message
                 );
 
-                $("#registerPassword")
-                    .focus();
+                passwordInput.focus();
 
                 return;
             }
-
 
             if (
                 password !==
@@ -873,23 +905,22 @@ function setupRegister() {
                     "رمز عبور و تکرار آن یکسان نیست."
                 );
 
-                $("#registerPasswordConfirm")
-                    .focus();
+                confirmInput.focus();
 
                 return;
             }
-
 
             const button =
                 form.querySelector(
                     ".submit-button"
                 );
 
+            if (button) {
 
-            button.classList.add(
-                "loading"
-            );
-
+                button.classList.add(
+                    "loading"
+                );
+            }
 
             setTimeout(() => {
 
@@ -899,11 +930,12 @@ function setupRegister() {
                         password
                     );
 
+                if (button) {
 
-                button.classList.remove(
-                    "loading"
-                );
-
+                    button.classList.remove(
+                        "loading"
+                    );
+                }
 
                 if (!result.success) {
 
@@ -915,46 +947,36 @@ function setupRegister() {
                     return;
                 }
 
-
                 showMessage(
                     "حساب شما با موفقیت ساخته شد. اکنون وارد شوید.",
                     "success"
                 );
 
-
-                /*
-                    فرم را پاک می‌کنیم.
-                */
-
                 form.reset();
 
                 updatePasswordStrength("");
-
-
-                /*
-                    بعد از ساخت حساب،
-                    کاربر به فرم ورود می‌رود.
-                */
 
                 setTimeout(() => {
 
                     switchMode();
 
-                    $("#loginUsername")
-                        .value =
-                        result.user.username;
+                    const loginUsername =
+                        $("#loginUsername");
 
-                    $("#loginPassword")
-                        .focus();
+                    if (loginUsername) {
+
+                        loginUsername.value =
+                            result.user.username;
+                    }
+
+                    $("#loginPassword")?.focus();
 
                 }, 900);
 
             }, 350);
-
         }
     );
 }
-
 
 /* =========================================================
    PASSWORD STRENGTH EVENT
@@ -965,11 +987,9 @@ function setupPasswordStrength() {
     const password =
         $("#registerPassword");
 
-
     if (!password) {
         return;
     }
-
 
     password.addEventListener(
         "input",
@@ -978,11 +998,9 @@ function setupPasswordStrength() {
             updatePasswordStrength(
                 password.value
             );
-
         }
     );
 }
-
 
 /* =========================================================
    WELCOME SOUND
@@ -993,48 +1011,40 @@ function setupWelcomeSound() {
     const audio =
         $("#welcomeSound");
 
-
     if (!audio) {
         return;
     }
-
 
     if (
         sessionStorage.getItem(
             "voicePlayed"
         )
     ) {
-
         return;
     }
-
 
     audio.loop = false;
 
     audio.currentTime = 0;
 
+    const playSound = () => {
 
-    const playSound =
-        () => {
+        audio
+            .play()
+            .then(() => {
 
-            audio
-                .play()
-                .then(() => {
+                sessionStorage.setItem(
+                    "voicePlayed",
+                    "true"
+                );
 
-                    sessionStorage.setItem(
-                        "voicePlayed",
-                        "true"
-                    );
+            })
+            .catch(() => {
 
-                })
-                .catch(() => {
+                // Autoplay توسط WebView مسدود شده است.
 
-                    // مرورگر اجازه پخش خودکار نداد
-
-                });
-
-        };
-
+            });
+    };
 
     window.addEventListener(
         "load",
@@ -1044,12 +1054,6 @@ function setupWelcomeSound() {
 
         }
     );
-
-
-    /*
-        اگر Autoplay توسط مرورگر بسته شد،
-        با اولین کلیک صدا اجرا می‌شود.
-    */
 
     document.addEventListener(
         "click",
@@ -1061,12 +1065,15 @@ function setupWelcomeSound() {
                 )
             ) {
 
+                document.removeEventListener(
+                    "click",
+                    playOnce
+                );
+
                 return;
             }
 
-
             playSound();
-
 
             if (
                 sessionStorage.getItem(
@@ -1079,11 +1086,9 @@ function setupWelcomeSound() {
                     playOnce
                 );
             }
-
         }
     );
 }
-
 
 /* =========================================================
    CHECK CURRENT SESSION
@@ -1094,32 +1099,63 @@ function checkCurrentSession() {
     const currentUser =
         getCurrentUser();
 
-
     if (!currentUser) {
         return;
     }
-
-
-    /*
-       اگر کاربر قبلاً وارد شده باشد،
-       دوباره صفحه ورود را نشان نده.
-    */
 
     console.log(
         "کاربر وارد شده:",
         currentUser.username
     );
 
-    /*
-       اگر نمی‌خواهی ورود قبلی باعث انتقال
-       خودکار شود، این قسمت را دست نزن.
-
-       برای انتقال خودکار می‌توانی این را فعال کنی:
-
-       window.location.href = "dashboard.html";
-    */
+    console.log(
+        "Session:",
+        currentUser
+    );
 }
 
+/* =========================================================
+   DEBUG
+========================================================= */
+
+function debugNavigation() {
+
+    console.log(
+        "========== MY MANAGER DEBUG =========="
+    );
+
+    console.log(
+        "Page URL:",
+        window.location.href
+    );
+
+    console.log(
+        "Base URL:",
+        document.baseURI
+    );
+
+    console.log(
+        "Dashboard:",
+        new URL(
+            "./dashboard.html",
+            document.baseURI
+        ).href
+    );
+
+    console.log(
+        "Current User:",
+        getCurrentUser()
+    );
+
+    console.log(
+        "Users:",
+        getUsers().length
+    );
+
+    console.log(
+        "======================================"
+    );
+}
 
 /* =========================================================
    INITIALIZE
@@ -1141,10 +1177,10 @@ document.addEventListener(
 
         setupWelcomeSound();
 
+        debugNavigation();
 
         const switchButton =
             $("#switchButton");
-
 
         if (switchButton) {
 
@@ -1153,6 +1189,5 @@ document.addEventListener(
                 switchMode
             );
         }
-
     }
 );
