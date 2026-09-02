@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="مدیریت محصولات فروشگاه | My Manager"
+    >
+
+    <title>محصولات | My Manager</title>
+
+    <link
+        rel="stylesheet"
+        href="products.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         MAIN APP
+    ====================================================== -->
+
+    <div class="app">
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="topbar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    MM
+                </div>
+
+                <div>
+                    <h1>
+                        محصولات
+                    </h1>
+
+                    <span>
+                        مدیریت محصولات فروشگاه
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="top-actions">
+
+                <button
+                    type="button"
+                    class="cart-button"
+                    id="openCartButton"
+                >
+                    🛒
+
+                    <span>
+                        سبد خرید
+                    </span>
+
+                    <b id="cartCount">
+                        0
+                    </b>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    id="openProductButton"
+                >
+                    + افزودن محصول
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section
+            class="statistics"
+            aria-label="آمار محصولات"
+        >
+
+            <!-- کل محصولات -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📦
+                </div>
+
+                <div>
+
+                    <span>
+                        کل محصولات
+                    </span>
+
+                    <strong id="totalProducts">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- موجودی -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <span>
+                        موجودی کل
+                    </span>
+
+                    <strong id="totalStock">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- ارزش موجودی -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        ارزش فروش موجودی
+                    </span>
+
+                    <strong id="inventoryValue">
+                        ۰ تومان
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- سبد -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🛒
+                </div>
+
+                <div>
+
+                    <span>
+                        سبد خرید
+                    </span>
+
+                    <strong id="cartItemsStat">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= TOOLBAR ================= -->
+
+        <section
+            class="toolbar"
+            aria-label="جستجو و فیلتر محصولات"
+        >
+
+            <!-- Search -->
+
+            <div class="search-container">
+
+                <span aria-hidden="true">
+                    🔍
+                </span>
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="جستجوی نام محصول یا کد کالا..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <!-- Category -->
+
+            <select
+                id="categoryFilter"
+                aria-label="فیلتر دسته‌بندی"
+            >
+
+                <option value="all">
+                    همه دسته‌بندی‌ها
+                </option>
+
+            </select>
+
+
+            <!-- Stock -->
+
+            <select
+                id="stockFilter"
+                aria-label="فیلتر موجودی"
+            >
+
+                <option value="all">
+                    همه موجودی‌ها
+                </option>
+
+                <option value="available">
+                    موجود
+                </option>
+
+                <option value="low">
+                    موجودی کم
+                </option>
+
+                <option value="out">
+                    ناموجود
+                </option>
+
+            </select>
+
+
+            <!-- Sort -->
+
+            <select
+                id="sortFilter"
+                aria-label="مرتب‌سازی"
+            >
+
+                <option value="newest">
+                    جدیدترین
+                </option>
+
+                <option value="oldest">
+                    قدیمی‌ترین
+                </option>
+
+                <option value="name">
+                    نام
+                </option>
+
+                <option value="priceHigh">
+                    گران‌ترین
+                </option>
+
+                <option value="priceLow">
+                    ارزان‌ترین
+                </option>
+
+                <option value="stockHigh">
+                    بیشترین موجودی
+                </option>
+
+            </select>
+
+
+            <!-- Add Category -->
+
+            <button
+                type="button"
+                class="category-button"
+                id="addCategoryButton"
+            >
+                + دسته‌بندی
+            </button>
+
+        </section>
+
+
+        <!-- ================= PRODUCTS ================= -->
+
+        <main>
+
+            <div
+                class="products-grid"
+                id="productsGrid"
+            ></div>
+
+
+            <!-- Empty -->
+
+            <div
+                class="empty-state"
+                id="emptyState"
+            >
+
+                <div class="empty-icon">
+                    📦
+                </div>
+
+                <h2>
+                    محصولی پیدا نشد
+                </h2>
+
+                <p>
+                    هنوز محصولی ثبت نشده یا نتیجه‌ای برای جستجوی شما وجود ندارد.
+                </p>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    id="emptyAddButton"
+                >
+                    + افزودن محصول
+                </button>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         PRODUCT MODAL
+    ====================================================== -->
+
+    <div
+        class="modal"
+        id="productModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="productModalTitle"
+        >
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="productModalTitle">
+                        افزودن محصول
+                    </h2>
+
+                    <p>
+                        اطلاعات محصول را وارد کنید
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="close-button"
+                    data-close="productModal"
+                    aria-label="بستن"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="productForm">
+
+                <input
+                    type="hidden"
+                    id="productId"
+                >
+
+
+                <!-- ================= IMAGE ================= -->
+
+                <div class="image-upload-area">
+
+                    <div
+                        class="image-preview"
+                        id="imagePreview"
+                    >
+                        📷
+                    </div>
+
+
+                    <label
+                        class="image-select-button"
+                        for="productImage"
+                    >
+                        انتخاب تصویر
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="productImage"
+                        accept="image/*"
+                        hidden
+                    >
+
+
+                    <button
+                        type="button"
+                        class="remove-image"
+                        id="removeImageButton"
+                    >
+                        حذف تصویر
+                    </button>
+
+                </div>
+
+
+                <!-- ================= PRODUCT FIELDS ================= -->
+
+                <div class="form-grid">
+
+                    <!-- Name -->
+
+                    <div class="form-group">
+
+                        <label for="productName">
+                            نام محصول *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productName"
+                            required
+                            autocomplete="off"
+                            placeholder="مثلاً همبرگر مخصوص"
+                        >
+
+                    </div>
+
+
+                    <!-- Category -->
+
+                    <div class="form-group">
+
+                        <label for="productCategory">
+                            دسته‌بندی
+                        </label>
+
+                        <select id="productCategory">
+
+                            <option value="">
+                                بدون دسته‌بندی
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Purchase Price -->
+
+                    <div class="form-group">
+
+                        <label for="purchasePrice">
+                            قیمت خرید
+                        </label>
+
+                        <input
+                            type="number"
+                            id="purchasePrice"
+                            min="0"
+                            step="1"
+                            value="0"
+                            inputmode="numeric"
+                            placeholder="0"
+                        >
+
+                    </div>
+
+
+                    <!-- Sale Price -->
+
+                    <div class="form-group">
+
+                        <label for="salePrice">
+                            قیمت فروش *
+                        </label>
+
+                        <input
+                            type="number"
+                            id="salePrice"
+                            min="0"
+                            step="1"
+                            required
+                            value="0"
+                            inputmode="numeric"
+                            placeholder="0"
+                        >
+
+                    </div>
+
+
+                    <!-- Stock -->
+
+                    <div class="form-group">
+
+                        <label for="productStock">
+                            موجودی
+                        </label>
+
+                        <input
+                            type="number"
+                            id="productStock"
+                            min="0"
+                            step="1"
+                            value="0"
+                            inputmode="numeric"
+                            placeholder="0"
+                        >
+
+                    </div>
+
+
+                    <!-- Product Code -->
+
+                    <div class="form-group">
+
+                        <label for="productCode">
+                            کد محصول / بارکد
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productCode"
+                            autocomplete="off"
+                            placeholder="مثلاً PR-1001"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="form-group">
+
+                    <label for="productDescription">
+                        توضیحات
+                    </label>
+
+                    <textarea
+                        id="productDescription"
+                        rows="4"
+                        placeholder="توضیحات محصول..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Actions -->
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        data-close="productModal"
+                    >
+                        انصراف
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        ذخیره محصول
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CATEGORY MODAL
+    ====================================================== -->
+
+    <div
+        class="modal"
+        id="categoryModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-box small-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="categoryModalTitle"
+        >
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="categoryModalTitle">
+                        دسته‌بندی جدید
+                    </h2>
+
+                    <p>
+                        دسته‌بندی دلخواه خود را بسازید
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="close-button"
+                    data-close="categoryModal"
+                    aria-label="بستن"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="categoryForm">
+
+                <div class="form-group">
+
+                    <label for="categoryName">
+                        نام دسته‌بندی
+                    </label>
+
+                    <input
+                        type="text"
+                        id="categoryName"
+                        required
+                        autocomplete="off"
+                        placeholder="مثلاً نوشیدنی"
+                    >
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                        data-close="categoryModal"
+                    >
+                        انصراف
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        ایجاد دسته‌بندی
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CART PANEL
+    ====================================================== -->
+
+    <div
+        class="cart-overlay"
+        id="cartOverlay"
+        aria-hidden="true"
+    >
+
+        <aside
+            class="cart-panel"
+            aria-label="سبد خرید"
+        >
+
+            <!-- Cart Header -->
+
+            <div class="cart-header">
+
+                <div>
+
+                    <h2>
+                        🛒 سبد خرید
+                    </h2>
+
+                    <span id="cartSubtitle">
+                        ۰ محصول
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="close-button"
+                    id="closeCartButton"
+                    aria-label="بستن سبد خرید"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <!-- Cart Content -->
+
+            <div
+                class="cart-content"
+                id="cartContent"
+            ></div>
+
+
+            <!-- Cart Footer -->
+
+            <div class="cart-footer">
+
+                <!-- Subtotal -->
+
+                <div class="calculation-row">
+
+                    <span>
+                        جمع کالاها
+                    </span>
+
+                    <strong id="cartSubtotal">
+                        ۰ تومان
+                    </strong>
+
+                </div>
+
+
+                <!-- ================= DISCOUNT ================= -->
+
+                <div class="manual-control">
+
+                    <div class="control-title">
+
+                        <span>
+                            تخفیف
+                        </span>
+
+
+                        <div class="toggle-buttons">
+
+                            <button
+                                type="button"
+                                class="discount-type active"
+                                data-type="percent"
+                            >
+                                %
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="discount-type"
+                                data-type="amount"
+                            >
+                                تومان
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <input
+                        type="number"
+                        id="discountInput"
+                        min="0"
+                        step="1"
+                        value="0"
+                        inputmode="numeric"
+                        placeholder="مقدار تخفیف"
+                    >
+
+                </div>
+
+
+                <!-- ================= TAX ================= -->
+
+                <div class="manual-control">
+
+                    <div class="control-title">
+
+                        <span>
+                            مالیات
+                        </span>
+
+
+                        <div class="toggle-buttons">
+
+                            <button
+                                type="button"
+                                class="tax-type active"
+                                data-type="percent"
+                            >
+                                %
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="tax-type"
+                                data-type="amount"
+                            >
+                                تومان
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <input
+                        type="number"
+                        id="taxInput"
+                        min="0"
+                        step="1"
+                        value="0"
+                        inputmode="numeric"
+                        placeholder="مقدار مالیات"
+                    >
+
+                </div>
+
+
+                <!-- Discount Value -->
+
+                <div class="calculation-row discount-row">
+
+                    <span>
+                        مبلغ تخفیف
+                    </span>
+
+                    <strong id="discountValue">
+                        ۰ تومان
+                    </strong>
+
+                </div>
+
+
+                <!-- Tax Value -->
+
+                <div class="calculation-row">
+
+                    <span>
+                        مبلغ مالیات
+                    </span>
+
+                    <strong id="taxValue">
+                        ۰ تومان
+                    </strong>
+
+                </div>
+
+
+                <!-- Final Total -->
+
+                <div class="total-row">
+
+                    <span>
+                        مبلغ نهایی
+                    </span>
+
+                    <strong id="cartTotal">
+                        ۰ تومان
+                    </strong>
+
+                </div>
+
+
+                <!-- Checkout -->
+
+                <button
+                    type="button"
+                    class="checkout-button"
+                    id="checkoutButton"
+                >
+                    ثبت فروش
+                </button>
+
+
+                <!-- Clear -->
+
+                <button
+                    type="button"
+                    class="clear-cart-button"
+                    id="clearCartButton"
+                >
+                    پاک کردن سبد
+                </button>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="products.js"></script>
+
+</body>
+
+</html>
