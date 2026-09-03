@@ -969,32 +969,50 @@ document
 
 <script>
 
-const currentUser =
-    sessionStorage.getItem("my_manager_current_user");
+(function () {
 
-if (!currentUser) {
-    window.location.replace("index.html");
-}
+    const currentUser =
+        sessionStorage.getItem(
+            "my_manager_current_user"
+        );
 
-</script>
+    if (!currentUser) {
 
-<script>
+        window.location.replace(
+            "index.html"
+        );
 
-window.addEventListener("load", function(){
+        return;
+    }
 
-    const theme = localStorage.getItem("theme");
+    try {
 
-    if(theme === "dark"){
+        const user =
+            JSON.parse(currentUser);
 
-        document.body.classList.add("dark");
+        console.log(
+            "کاربر وارد شده:",
+            user.username
+        );
 
-    }else{
+    } catch (error) {
 
-        document.body.classList.remove("dark");
+        console.error(
+            "Session نامعتبر است:",
+            error
+        );
+
+        sessionStorage.removeItem(
+            "my_manager_current_user"
+        );
+
+        window.location.replace(
+            "index.html"
+        );
 
     }
 
-});
+})();
 
 </script>
 
