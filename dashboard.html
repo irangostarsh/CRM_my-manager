@@ -969,10 +969,11 @@ document
 
 <script>
 
-if(localStorage.getItem("login")!=="true"){
+const currentUser =
+    sessionStorage.getItem("my_manager_current_user");
 
-location.href="index.html";
-
+if (!currentUser) {
+    window.location.replace("index.html");
 }
 
 </script>
